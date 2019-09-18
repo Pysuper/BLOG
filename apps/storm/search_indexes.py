@@ -1,5 +1,5 @@
-from haystack import indexes
 from .models import Article
+from haystack import indexes
 
 
 class ArticleIndex(indexes.SearchIndex, indexes.Indexable):

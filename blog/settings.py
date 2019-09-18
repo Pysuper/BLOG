@@ -3,7 +3,7 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '7@ptnvcl_l4y=n!%=-4hjnib=+28vf2=vb=18+8n5^sn3wz5ul'
+SECRET_KEY = 'g=hfy#h-k2$lwq=*4b)vkjg#zpvul2fw*m4pi_c($3tak=ms8j'
 
 DEBUG = True
 
@@ -16,15 +16,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
-    'storm',
-    'xadmin',
+    'django.contrib.humanize',  # 添加人性化过滤器
+    'storm',  # 博客应用
+    'user',  # 自定义用户应用
+    'comment',  # 评论
+    'xadmin',  # xadmin
     'crispy_forms',
-    'haystack',
-    'user',
-    'comment',
-    'rest_framework',
-
+    'ckeditor', # 配置富文本编辑器
+    'ckeditor_uploader',    # 配置上传图片
+    'haystack',  # 全文搜索应用 这个要放在其他应用之前
+    'rest_framework',  # API
 ]
 
 MIDDLEWARE = [
@@ -42,7 +43,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 添加此行，注册 Django templates模板
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -58,22 +59,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'NAME': 'BLOG_TAB',
-        'OPTIONS': {  # 避免映射数据库时出现警告
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        },
+        'NAME': 'blog',
+        # 避免映射数据库时出现警告
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        #     'charset': 'utf8mb4',
+        # },
     }
 }
+
+# Password validation
+# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -90,6 +96,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Internationalization
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
+
 LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
@@ -100,74 +109,20 @@ USE_L10N = True
 
 USE_TZ = False
 
-# 配置静态文件信息
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-# 媒体文件收集
+# 媒体文件收集 ==> 富文本编辑器的文件上传路径
 MEDIA_URL = "/media/"  # 媒体文件别名(相对路径) 和 绝对路径
-MEDIA_ROOT = (os.path.join(BASE_DIR, 'media'))
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, 'media')
+)
 CKEDITOR_UPLOAD_PATH = "article_images" # 富文本编辑器图片上传的保存路径
-
-# 日志文件
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
-    'formatters': {  # 日志信息显示的格式
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(lineno)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
-        },
-    },
-    'filters': {  # 对日志进行过滤
-        'require_debug_true': {  # django在debug模式下才输出日志
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    'handlers': {  # 日志处理方法
-        'console': {  # 向终端中输出日志
-            'level': 'INFO',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'file': {  # 向文件中输出日志
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(os.path.dirname(BASE_DIR), "BLOG/logs/blog.log"),  # 日志文件的位置
-            'maxBytes': 300 * 1024 * 1024,
-            'backupCount': 10,
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {  # 日志器
-        'django': {  # 定义了一个名为django的日志器
-            'handlers': ['console', 'file'],  # 可以同时向终端与文件中输出日志
-            'propagate': True,  # 是否继续传递日志信息
-            'level': 'INFO',  # 日志器接收的最低日志级别
-        },
-    }
-}
-
-# 自定义文章信息
-AUTH_USER_MODEL = 'user.Ouser'
-
-SITE_DESCRIPTION = "small_spider的个人网站，记录生活的瞬间，分享学习的心得，感悟生活，留住感动，静静寻觅生活的美好"
-
-SITE_KEYWORDS = "Python"
-
-SITE_END_TITLE = "聚会阅读器"
-
-API_FLAG = True
-
-XADMIN_TITLE = "TAO BLOG 后台管理"  # 左上方的文字
-
-XADMIN_FOOTER_TITLE = "small.spider.p@gmail.com"  # 最下面的文字
-
-# 添加 apps 目录
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # 统一分页设置
 BASE_PAGE_BY = 4
@@ -180,6 +135,40 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),  # 保存索引文件的地址，选择主目录下，这个会自动生成
     }
 }
-
 # 自动更新索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 自定义用户model
+AUTH_USER_MODEL = 'user.Ouser'
+
+SITE_DESCRIPTION = "small_spider的个人网站，记录生活的瞬间，分享学习的心得，感悟生活，留住感动，静静寻觅生活的美好"
+
+SITE_KEYWORDS = "Python"
+
+SITE_END_TITLE = "聚会阅读器"
+
+API_FLAG = True
+
+# 配置后台xadmin
+XADMIN_TITLE = "TAO BLOG 后台管理"  # 左上方的文字
+XADMIN_FOOTER_TITLE = "small.spider.p@gmail.com"  # 最下面的文字
+
+# 配置富文本编辑器
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "height": 300,
+        "width": 800,
+        "tabSpaces": 4,
+        "extraPlugins": "codesnippet",  # 配置代码插件
+    },
+}
+
+# 修改默认存储引擎为自定义的
+DEFAULT_FILE_STORAGE = 'blog.storage.WatermarkStoarge'
+
+# 配置ckeditor的js路径
+CKEDITOR_JQUERY_URL ='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'
+
+# 将CKEditor需要的媒体资源拷入STATIC_ROOT指定的路径中
+STATIC_ROOT = os.path.join(BASE_DIR,'whoosh_index')

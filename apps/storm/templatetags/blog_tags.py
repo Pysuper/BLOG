@@ -1,15 +1,21 @@
-from django import template
+# ---------------------------
+__author__ = 'stormsha'
+__date__ = '2019/3/15 20:31'
+# ---------------------------
 
-from ..models import *
+# 创建了新的tags标签文件后必须重启服务器
+
+from django import template
+from ..models import Article, Category, Tag, Carousel, FriendLink, BigCategory, Activate, Keyword
 from django.db.models.aggregates import Count
 from django.utils.html import mark_safe
 import re
 
-# 注册自定义标签函数 ==> 自定义模板标签
+# 注册自定义标签函数
 register = template.Library()
 
 
-# 获取导航条大分类数据集
+# 获取导航条大分类查询集
 @register.simple_tag
 def get_bigcategory_list():
     """返回大分类列表"""
@@ -18,7 +24,7 @@ def get_bigcategory_list():
 
 # 返回文章分类查询集
 @register.simple_tag
-def get_category_lsit(id):
+def get_category_list(id):
     """返回小分类列表"""
     return Category.objects.filter(bigcategory_id=id)
 
@@ -26,7 +32,7 @@ def get_category_lsit(id):
 # 返回公告查询集
 @register.simple_tag
 def get_active():
-    """获取活跃的友情链接"""
+    """"获取活跃的友情链接"""
     text = Activate.objects.filter(is_active=True)
     if text:
         text = text[0].text
@@ -35,11 +41,11 @@ def get_active():
     return mark_safe(text)
 
 
-# 返回归档文件查询集
+# 获取归档文章查询集
 @register.simple_tag
 def get_data_date():
     """获取文章发表的不同月份"""
-    article_dates = Activate.objects.datetimes('create_date', 'month', order='DESC')
+    article_dates = Article.objects.datetimes('create_date', 'month', order='DESC')
     return article_dates
 
 
@@ -60,7 +66,7 @@ def get_friends():
 # 获取幻灯片查询集
 @register.simple_tag
 def get_carousel_list():
-    """获取轮播图列表"""
+    """获取轮播图片列表"""
     return Carousel.objects.all()
 
 
@@ -70,13 +76,13 @@ def get_carousel_index():
     return Carousel.objects.filter(number__lte=5)
 
 
-# 获取右侧热门专题幻灯片查询
+# 获取右侧栏热门专题幻灯片查询集
 @register.simple_tag
 def get_carousel_right():
     return Carousel.objects.filter(number__gt=5, number__lte=10)
 
 
-# 获取热门排行数据查询集，参数：sort 文章类型，num 类型
+# 获取热门排行数据查询集，参数：sort 文章类型， num 数量
 @register.simple_tag
 def get_article_list(sort=None, num=None):
     """获取指定排序方式和指定数量的文章"""
@@ -109,14 +115,13 @@ def load_pages(context):
     return context
 
 
-# 获取请求的参数
 @register.simple_tag
 def get_request_param(request, param, default=None):
     """获取请求的参数"""
     return request.POST.get(param) or request.GET.get(param, default)
 
 
-# 获取上一篇文章，参数：当前文章id
+# 获取前一篇文章，参数当前文章 ID
 @register.simple_tag
 def get_article_previous(article_id):
     has_previous = False
@@ -134,12 +139,12 @@ def get_article_previous(article_id):
         return
 
 
-# 获取下一篇文章，参数：当前文章id
+# 获取下一篇文章，参数当前文章 ID
 @register.simple_tag
 def get_article_next(article_id):
     has_next = False
     id_next = int(article_id)
-    article_id_max = Article.objects.all().order_by('-id').first()  # 按照id倒排序，取第一个
+    article_id_max = Article.objects.all().order_by('-id').first()
     id_max = article_id_max.id
     while not has_next and id_next <= id_max:
         article_next = Article.objects.filter(id=id_next + 1).first()
@@ -159,10 +164,7 @@ def get_article_next(article_id):
 def get_category_article():
     article_4 = get_article_list('views', 4)
     article_8 = get_article_list('views', 8)
-    return {
-        'article_4': article_4,
-        'article_8': article_8
-    }
+    return {'article_4': article_4, 'article_8': article_8}
 
 
 # 获取文章大分类
@@ -173,7 +175,7 @@ def get_title(category):
         return cat[0]
 
 
-# 获取文章keywords
+# 获取文章 keywords
 @register.simple_tag
 def get_article_keywords(article):
     keywords = []
@@ -190,18 +192,15 @@ def get_title(category):
         return a[0]
 
 
-# 自定义标题搜索词高亮函数，忽略大小写
 @register.simple_tag
 def my_highlight(text, q):
+    """自定义标题搜索词高亮函数，忽略大小写"""
     if len(q) > 1:
         try:
-            text = re.sub(
-                q,
-                lambda a: '<span class="highlighted">{}</span>'.format(a.group()),
-                text,
-                flags=re.IGNORECASE
-            )
+            text = re.sub(q, lambda a: '<span class="highlighted">{}</span>'.format(a.group()),
+                          text, flags=re.IGNORECASE)
             text = mark_safe(text)
         except:
             pass
     return text
+

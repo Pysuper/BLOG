@@ -7,9 +7,9 @@ from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 # RESEful API VIEWS
 class UserListSet(viewsets.ModelViewSet):
-    queryset = Ouser.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+    queryset = Ouser.objects.all()  # 指定查询集
+    serializer_class = UserSerializer  # 指定serializer序列化器
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)  # 登陆者的权限，是Admin还是普通用户，是Admin可以访问还是普通用户可以访问=> 写入时的权限校验
 
 
 class ArticleListSet(viewsets.ModelViewSet):

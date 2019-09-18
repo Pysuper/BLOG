@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.contrib.sitemaps import Sitemap
 from .models import Article, Category, Tag
 from django.db.models.aggregates import Count

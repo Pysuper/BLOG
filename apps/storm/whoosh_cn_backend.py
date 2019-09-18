@@ -1,7 +1,4 @@
-# encoding: utf-8
-
 from __future__ import absolute_import, division, print_function, unicode_literals
-
 import json
 import os
 import re
@@ -27,7 +24,8 @@ from haystack.utils.app_loading import haystack_get_model
 try:
     import whoosh
 except ImportError:
-    raise MissingDependency("The 'whoosh' backend requires the installation of 'Whoosh'. Please refer to the documentation.")
+    raise MissingDependency(
+        "The 'whoosh' backend requires the installation of 'Whoosh'. Please refer to the documentation.")
 
 # Handle minimum requirement.
 if not hasattr(whoosh, '__version__') or whoosh.__version__ < (2, 5, 0):
@@ -89,7 +87,8 @@ class WhooshSearchBackend(BaseSearchBackend):
             self.use_file_storage = False
 
         if self.use_file_storage and not self.path:
-            raise ImproperlyConfigured("You must specify a 'PATH' in your settings for connection '%s'." % connection_alias)
+            raise ImproperlyConfigured(
+                "You must specify a 'PATH' in your settings for connection '%s'." % connection_alias)
 
         self.log = logging.getLogger('haystack')
 
@@ -118,7 +117,8 @@ class WhooshSearchBackend(BaseSearchBackend):
 
             self.storage = LOCALS.RAM_STORE
 
-        self.content_field_name, self.schema = self.build_schema(connections[self.connection_alias].get_unified_index().all_searchfields())
+        self.content_field_name, self.schema = self.build_schema(
+            connections[self.connection_alias].get_unified_index().all_searchfields())
         self.parser = QueryParser(self.content_field_name, schema=self.schema)
 
         if new_index is True:
@@ -147,23 +147,30 @@ class WhooshSearchBackend(BaseSearchBackend):
                 if field_class.indexed is False:
                     schema_fields[field_class.index_fieldname] = IDLIST(stored=True, field_boost=field_class.boost)
                 else:
-                    schema_fields[field_class.index_fieldname] = KEYWORD(stored=True, commas=True, scorable=True, field_boost=field_class.boost)
+                    schema_fields[field_class.index_fieldname] = KEYWORD(stored=True, commas=True, scorable=True,
+                                                                         field_boost=field_class.boost)
             elif field_class.field_type in ['date', 'datetime']:
                 schema_fields[field_class.index_fieldname] = DATETIME(stored=field_class.stored, sortable=True)
             elif field_class.field_type == 'integer':
-                schema_fields[field_class.index_fieldname] = NUMERIC(stored=field_class.stored, numtype=int, field_boost=field_class.boost)
+                schema_fields[field_class.index_fieldname] = NUMERIC(stored=field_class.stored, numtype=int,
+                                                                     field_boost=field_class.boost)
             elif field_class.field_type == 'float':
-                schema_fields[field_class.index_fieldname] = NUMERIC(stored=field_class.stored, numtype=float, field_boost=field_class.boost)
+                schema_fields[field_class.index_fieldname] = NUMERIC(stored=field_class.stored, numtype=float,
+                                                                     field_boost=field_class.boost)
             elif field_class.field_type == 'boolean':
                 # Field boost isn't supported on BOOLEAN as of 1.8.2.
                 schema_fields[field_class.index_fieldname] = BOOLEAN(stored=field_class.stored)
             elif field_class.field_type == 'ngram':
-                schema_fields[field_class.index_fieldname] = NGRAM(minsize=3, maxsize=15, stored=field_class.stored, field_boost=field_class.boost)
+                schema_fields[field_class.index_fieldname] = NGRAM(minsize=3, maxsize=15, stored=field_class.stored,
+                                                                   field_boost=field_class.boost)
             elif field_class.field_type == 'edge_ngram':
-                schema_fields[field_class.index_fieldname] = NGRAMWORDS(minsize=2, maxsize=15, at='start', stored=field_class.stored, field_boost=field_class.boost)
+                schema_fields[field_class.index_fieldname] = NGRAMWORDS(minsize=2, maxsize=15, at='start',
+                                                                        stored=field_class.stored,
+                                                                        field_boost=field_class.boost)
             else:
                 # 调用结巴分词
-                schema_fields[field_class.index_fieldname] = TEXT(stored=True, analyzer=ChineseAnalyzer(), field_boost=field_class.boost, sortable=True)
+                schema_fields[field_class.index_fieldname] = TEXT(stored=True, analyzer=ChineseAnalyzer(),
+                                                                  field_boost=field_class.boost, sortable=True)
 
             if field_class.document is True:
                 content_field_name = field_class.index_fieldname
@@ -172,7 +179,8 @@ class WhooshSearchBackend(BaseSearchBackend):
         # Fail more gracefully than relying on the backend to die if no fields
         # are found.
         if len(schema_fields) <= initial_key_count:
-            raise SearchBackendError("No fields were found in any search_indexes. Please correct this before attempting to search.")
+            raise SearchBackendError(
+                "No fields were found in any search_indexes. Please correct this before attempting to search.")
 
         return (content_field_name, Schema(**schema_fields))
 
@@ -407,7 +415,7 @@ class WhooshSearchBackend(BaseSearchBackend):
                 if narrowed_results:
                     narrowed_results.filter(recent_narrowed_results)
                 else:
-                   narrowed_results = recent_narrowed_results
+                    narrowed_results = recent_narrowed_results
 
         self.index = self.index.refresh()
 
@@ -459,7 +467,8 @@ class WhooshSearchBackend(BaseSearchBackend):
                     'spelling_suggestion': None,
                 }
 
-            results = self._process_results(raw_page, highlight=highlight, query_string=query_string, spelling_query=spelling_query, result_class=result_class)
+            results = self._process_results(raw_page, highlight=highlight, query_string=query_string,
+                                            spelling_query=spelling_query, result_class=result_class)
             searcher.close()
 
             if hasattr(narrow_searcher, 'close'):
@@ -536,7 +545,7 @@ class WhooshSearchBackend(BaseSearchBackend):
                 if narrowed_results:
                     narrowed_results.filter(recent_narrowed_results)
                 else:
-                   narrowed_results = recent_narrowed_results
+                    narrowed_results = recent_narrowed_results
 
         page_num, page_length = self.calculate_page(start_offset, end_offset)
 
@@ -624,8 +633,8 @@ class WhooshSearchBackend(BaseSearchBackend):
                     else:
                         additional_fields[string_key] = self._to_python(value)
 
-                del(additional_fields[DJANGO_CT])
-                del(additional_fields[DJANGO_ID])
+                del (additional_fields[DJANGO_CT])
+                del (additional_fields[DJANGO_ID])
 
                 if highlight:
                     sa = StemmingAnalyzer()
@@ -733,7 +742,8 @@ class WhooshSearchBackend(BaseSearchBackend):
                 for dk, dv in date_values.items():
                     date_values[dk] = int(dv)
 
-                return datetime(date_values['year'], date_values['month'], date_values['day'], date_values['hour'], date_values['minute'], date_values['second'])
+                return datetime(date_values['year'], date_values['month'], date_values['day'], date_values['hour'],
+                                date_values['minute'], date_values['second'])
 
         try:
             # Attempt to use json to load the values.
@@ -901,7 +911,6 @@ class WhooshSearchQuery(BaseSearchQuery):
                 query_frag = "(%s)" % query_frag
 
         return u"%s%s" % (index_fieldname, query_frag)
-
 
         # if not filter_type in ('in', 'range'):
         #     # 'in' is a bit of a special case, as we don't want to

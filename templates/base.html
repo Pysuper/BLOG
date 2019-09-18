@@ -2,24 +2,35 @@
 {% load blog_tags static %}
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="baidu-tc-verification" content="0fb041a64ee71333c957d8c784961cc8"/>
     <meta property="qc:admins" content="145637425211673116375"/>
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <!-- All in One SEO Pack 2.3.12.2.1 by Michael Torbert of Semper Fi Web Design[392,409] -->
+    <link rel="stylesheet" href="/static/css/search-form.css">
     {% block description %}
     {% endblock description %}
+
     {% block keywords %}
     {% endblock keywords %}
     <link rel="icon" href="{% static 'images/picture.ico' %}" type="image/x-icon"/>
     <title>
-            {% block title %}{% endblock title %}
+        {% block title %}
+        {% endblock title %}
     </title>
 
     <script>
-        window._deel = {name: '静觅',url: '/', ajaxpager: 'on', commenton: 0, roll: [11,12]}
+        window._deel = {
+            name: 'TAO',
+            url: '/',
+            ajaxpager: 'on',
+            commenton: 0,
+            roll: [11, 12]
+        }
     </script>
 
     <!-- /all in one seo pack -->
@@ -31,7 +42,9 @@
             "ext": ".png",
             "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.4\/svg\/",
             "svgExt": ".svg",
-            "source": {"concatemoji": "https:\/\/cuiqingcai.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"}
+            "source": {
+                "concatemoji": "https:\/\/cuiqingcai.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.6"
+            }
         };
         !function (a, b, c) {
             function d(a, b) {
@@ -47,9 +60,14 @@
                 var b;
                 if (!l || !l.fillText) return !1;
                 switch (l.textBaseline = "top", l.font = "600 32px Arial", a) {
-                    case"flag":
-                        return !(b = d([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819])) && (b = d([55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447]), !b);
-                    case"emoji":
+                    case "flag":
+                        return !(b = d([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819])) && (b = d([
+                            55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128,
+                            56423, 56128, 56447
+                        ], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203,
+                            56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447
+                        ]), !b);
+                    case "emoji":
                         return b = d([55357, 56692, 8205, 9792, 65039], [55357, 56692, 8203, 9792, 65039]), !b
                 }
                 return !1
@@ -60,18 +78,24 @@
                 c.src = a, c.defer = c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c)
             }
 
-            var g, h, i, j, k = b.createElement("canvas"), l = k.getContext && k.getContext("2d");
+            var g, h, i, j, k = b.createElement("canvas"),
+                l = k.getContext && k.getContext("2d");
             for (j = Array("flag", "emoji"), c.supports = {
                 everything: !0,
                 everythingExceptFlag: !0
-            }, i = 0; i < j.length; i++) c.supports[j[i]] = e(j[i]), c.supports.everything = c.supports.everything && c.supports[j[i]], "flag" !== j[i] && (c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && c.supports[j[i]]);
-            c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c.readyCallback = function () {
+            }, i = 0; i < j.length; i++) c.supports[j[i]] = e(j[i]), c.supports.everything = c.supports
+                .everything && c.supports[j[i]], "flag" !== j[i] && (c.supports.everythingExceptFlag = c.supports
+                .everythingExceptFlag && c.supports[j[i]]);
+            c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c
+                .readyCallback = function () {
                 c.DOMReady = !0
             }, c.supports.everything || (h = function () {
                 c.readyCallback()
-            }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", h, !1), a.addEventListener("load", h, !1)) : (a.attachEvent("onload", h), b.attachEvent("onreadystatechange", function () {
+            }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", h, !1), a.addEventListener("load",
+                h, !1)) : (a.attachEvent("onload", h), b.attachEvent("onreadystatechange", function () {
                 "complete" === b.readyState && c.readyCallback()
-            })), g = c.source || {}, g.concatemoji ? f(g.concatemoji) : g.wpemoji && g.twemoji && (f(g.twemoji), f(g.wpemoji)))
+            })), g = c.source || {}, g.concatemoji ? f(g.concatemoji) : g.wpemoji && g.twemoji && (f(g.twemoji),
+                f(g.wpemoji)))
         }(window, document, window._wpemojiSettings);
     </script>
     <style type="text/css">
@@ -88,18 +112,26 @@
             padding: 0 !important;
         }
     </style>
-    {% block head %}{% endblock head %}
+    {% block head %}
+    {% endblock head %}
     <link rel='stylesheet' id='crayon-css' href='{% static 'css/crayon.min.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css' media='screen, print'/>
-    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css' media='print'/>
+    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css'
+          media='screen, print'/>
+    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css'
+          media='print'/>
     <link rel='stylesheet' id='style-css' href='{% static 'css/style.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}' type='text/css' media='all'/>
-    <link rel="stylesheet" href="{% static 'highlights/github.css' %}">
+    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}'
+          type='text/css' media='all'/>
+    {% block login_css %}
+    {% endblock login_css %}
+    <link rel="stylesheet" href="{% static 'highlights/monokai.css' %}">
     <script type='text/javascript' src='{% static 'js/jquery.min.js' %}'></script>
-
     <script type='text/javascript'>
         /* <![CDATA[ */
         var CrayonSyntaxSettings = {
@@ -122,8 +154,15 @@
     </script>
     <script type='text/javascript' src='{% static 'js/crayon.min.js' %}'></script>
     <script type='text/javascript' src='{% static 'js/jquery.fitvids.js' %}'></script>
+    {% block login_js %}
+    {% endblock login_js %}
     <style>
-        .latex_thm, .latex_lem, .latex_cor, .latex_defn, .latex_prop, .latex_rem {
+        .latex_thm,
+        .latex_lem,
+        .latex_cor,
+        .latex_defn,
+        .latex_prop,
+        .latex_rem {
             margin: 0;
             padding: 5px;
             background: lightcyan;
@@ -157,82 +196,133 @@
 
     <!--百度统计-->
     <meta name="360-site-verification" content="bdc579accc68a98f1258ebcce2266afa"/>
-    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405" src="{% static 'js/lightapp.js' %}"></script>
+    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405"
+            src="{% static 'js/lightapp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript"></script>
 </head>
 
 <body class="home blog">
 
-    <header id="header" class="header">
-        <div class="container-inner">
-            <!--头部-->
-            <div class="yusi-logo">
-                    <a href="/">
-                        <h1>
-                            <span class="yusi-mono">静觅</span>
-                            <span class="yusi-bloger">StormSha的个人博客</span>
-                        </h1>
-                    </a>
-                </div>
-
-            <!--导航条-->
-            <div id="nav-header" class="navbar">
-                <ul class="nav">
-                    <!--获取一级分类信息-->
-                    {% get_bigcategory_list as bigcategory %}
-                    <li id="menu-item-44"
-                        class="menu-item menu-item-type-custom menu-item-object-custom {% if not category %}current-menu-item current_page_item{% endif %} menu-item-home menu-item-44"><a
-                            href="/">首页</a></li>
-
-                    <!--导航条一级分类渲染-->
-                    {% for big in bigcategory %}
-
-                        <!--获取二级分类信息-->
-                        {% get_category_list big.id as cate %}
-
-                        <!--如果一级分类下有二级分类则进行渲染-->
-                        {% if cate %}
-                            <li id="menu-item-14"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category {% if category == big.slug %}current-menu-item {% endif %} menu-item-has-children menu-item-14">
-                                    <a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a>
-                                        <ul class="sub-menu">
-                                            <!--导航条二级分类渲染-->
-                                            {% for c in cate %}
-                                                    <li id="menu-item-19" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19"><a href="{% url 'blog:category'  big.slug   c.slug  %}">{{ c.name }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                            </li>
-                        <!--无二级分类的一级分类渲染-->
-                        {% else %}
-                            <li id="menu-item-851" class="menu-item menu-item-type-post_type menu-item-object-page {% if category == big.slug %}current-menu-item {% endif %} menu-item-851"><a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    <!--导航条结束-->
-
-                    <!--搜索框-->
-                    <li style="float:right;">
-                        <div class="toggle-search"><i class="fa fa-search"></i></div>
-                        <div class="search-expand" style="display: none;">
-                            <div class="search-expand-inner">
-                                <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
-                                    <div class="input-group">
-                                        <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索" required=True>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-info rounded-0" type="submit"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div><!-- /input-group -->
-                                </form>
-                            </div>
-                        </div>
-                    </li>
-                    <!--搜索框结束-->
-
-                </ul>
-            </div>
-            <!--导航条结束-->
+<header id="header" class="header">
+    <div class="container-inner">
+        <!--头部-->
+        <div class="yusi-logo">
+            <a href="/">
+                <h1>
+                    <span class="yusi-mono">SmallSpider</span>
+                    <span class="yusi-bloger">Tao & 个人博客</span>
+                </h1>
+            </a>
         </div>
-    </header>
+
+        <!--导航条-->
+        <div id="nav-header" class="navbar">
+            <ul class="nav">
+                <!--获取一级分类信息-->
+                {% get_bigcategory_list as bigcategory %}
+                <li id="menu-item-44"
+                    class="menu-item menu-item-type-custom menu-item-object-custom {% if not category %}current-menu-item current_page_item{% endif %} menu-item-home menu-item-44">
+                    <a href="/" style="width: 70px;">首页</a>
+                </li>
+
+                <!--导航条一级分类渲染-->
+                {% for big in bigcategory %}
+
+                    <!--获取二级分类信息-->
+                    {% get_category_list big.id as cate %}
+
+                    <!--如果一级分类下有二级分类则进行渲染-->
+                    {% if cate %}
+                        <li id="menu-item-14"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category {% if category == big.slug %}current-menu-item {% endif %} menu-item-has-children menu-item-14">
+                            <a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a>
+                            <ul class="sub-menu">
+                                <!--导航条二级分类渲染-->
+                                {% for c in cate %}
+                                    <li id="menu-item-19"
+                                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19">
+                                        <a
+                                                href="{% url 'blog:category'  big.slug   c.slug %}">{{ c.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <!--无二级分类的一级分类渲染-->
+                    {% else %}
+                        <li id="menu-item-851"
+                            class="menu-item menu-item-type-post_type menu-item-object-page {% if category == big.slug %}current-menu-item {% endif %} menu-item-851">
+                            <a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!--导航条结束-->
+
+                <!--搜索框-->
+                <li style="float:right;">
+                <li id="menu-item-851">
+                    <div class="toggle-search"><i class="fa fa-search"></i></div>
+                    <div class="search-expand" style="display: none;">
+                        <div class="search-expand-inner">
+                            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get"
+                                  id="searchform" action="{% url 'blog:search' %}">
+                                <div class="input-group">
+                                    <input type="search" name="q" class="form-control rounded-0 f-15"
+                                           placeholder="搜索" required=True>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-info rounded-0" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+                    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+                    <script type="text/javascript">
+                        function searchToggle(obj, evt) {
+                            var container = $(obj).closest('.search-wrapper');
+
+                            if (!container.hasClass('active')) {
+                                container.addClass('active');
+                                evt.preventDefault();
+                            } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+                                container.removeClass('active');
+                                // clear input
+                                container.find('.search-input').val('');
+                                // clear and hide result container when we press close
+                                container.find('.result-container').fadeOut(100, function () {
+                                    $(this).empty();
+                                });
+                            }
+                        }
+
+                        function submitFn(obj, evt) {
+                            value = $(obj).find('.search-input').val().trim();
+
+                            _html = "Yup yup! Your search text sounds like this: ";
+                            if (!value.length) {
+                                _html = "Yup yup! Add some text friend :D";
+                            } else {
+                                _html += "<b>" + value + "</b>";
+                            }
+
+                            $(obj).find('.result-container').html('<span>' + _html + '</span>');
+                            $(obj).find('.result-container').fadeIn(100);
+
+                            evt.preventDefault();
+                        }
+                    </script>
+                </li>
+                <!--搜索框结束-->
+
+            </ul>
+        </div>
+        <!--导航条结束-->
+    </div>
+</header>
 
 <section class="container">
 
@@ -241,24 +331,26 @@
         <!--目前登录功能只有注册登录其它没必要没做-->
         <div class="pull-right">
             {% if request.session.username|default:'' == '' %}
-                    <i class="fa fa-power-off"></i>
-                    <a href="{% url 'accounts:login' %}?next={{ request.path }}">登录</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <i class="fa fa-user-plus"></i>
-                    <a href="{% url 'accounts:register' %}?next={{ request.path }}">注册</a>
+                <i class="fa fa-power-off"></i>
+                <a href="{% url 'accounts:login' %}?next={{ request.path }}">登录</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-user-plus"></i>
+                <a href="{% url 'accounts:register' %}?next={{ request.path }}">注册</a>
             {% else %}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>
-                    <a href="/">投稿</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                    <a href="{% url 'accounts:profile' %}?next={{ request.path }}">{{ request.session.username }}</a>
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <a href="{% url 'accounts:logout' %}?next={{ request.path }}">退出</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>
+                <a href="/">投稿</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <a href="{% url 'accounts:profile' %}?next={{ request.path }}">{{ request.session.username }}</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i>
+                <a href="{% url 'accounts:logout' %}?next={{ request.path }}">退出</a>
             {% endif %}
         </div>
         <!--登录注册结束-->
 
         <!--公告-->
-        <div class="toptip"><strong class="text-success"><i class="fa fa-volume-up"></i> </strong>   {% get_active %}</div>
+        <div class="toptip">
+            <!-- <strong class="text-success"><i class="fa fa-volume-up"></i></strong>{% get_active %} -->
+            <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎欢迎~~~
+        </div>
         <!--公告结束-->
 
     </div>
@@ -275,21 +367,23 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
-            <a href="/" title="静觅">StormSha</a> 版权所有丨采用
+            <a href="/" title="静觅">SmallSpider</a> 版权所有丨采用
             <a href="http://yusi123.com/"> 欲思 </a>主题丨
-            <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于
-            <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">腾讯云主机</a> &
-            <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 </a>丨
+            {#            <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于#}
+            {#            <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">腾讯云主机</a> &#}
+            {#            <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 </a>丨#}
             <a href="/sitemap.xml" title="Sitemap" target="_blank">网站地图</a>
         </div>
-
     </div>
 </footer>
 <!--网站底部结束-->
 
-<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css' media='all' property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all' property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css'
+      media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all'
+      property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all'
+      property='stylesheet'/>
 <script type='text/javascript' src='{% static 'js/jquery.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/wp-embed.min.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/jquery.nivo.slider.pack.js' %}'></script>
@@ -298,7 +392,7 @@
     /*300*25 创建于 2019-03-2*/
     var cpro_id = "u1959047";
 </script>
-<script src="{%  static 'js/s.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/s.js' %}" type="text/javascript"></script>
 
 <script>
     setTimeout(function () {
@@ -322,7 +416,13 @@
         })
     });
 </script>
+
+<div class="rollto" style="display: block;">
+    <button class="btn btn-inverse" data-type="totop" title="回顶部"><i class="fa fa-arrow-up"></i></button>
+</div>
+
 </body>
+
 </html>
 <!-- Dynamic page generated in 1.148 seconds. -->
 <!-- Cached page generated by WP-Super-Cache on 2019-02-18 20:33:39 -->

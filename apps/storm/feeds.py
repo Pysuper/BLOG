@@ -1,12 +1,15 @@
-from django.contrib.syndication.views import Feed
 from .models import Article
 from django.conf import settings
+from django.contrib.syndication.views import Feed
 
 
 class AllArticleRssFeed(Feed):
-    title = settings.SITE_END_TITLE  # 显示在聚会阅读器上的标题
-    link = "/"  # 跳转网址，为主页
-    description = settings.SITE_DESCRIPTION  # 描述内容
+    # 显示在聚会阅读器上的标题
+    title = settings.SITE_END_TITLE
+    # 跳转网址，为主页
+    link = "/"
+    # 描述内容
+    description = settings.SITE_DESCRIPTION
 
     # 需要显示的内容条目，这个可以自己挑选一些热门或者最新的博客
     def items(self):
