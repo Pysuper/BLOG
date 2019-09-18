@@ -1,0 +1,3 @@
+insert into storm_friendlink values (1, 'Github', '代码管理品台', 'https://github.com/', '', '2019-08-17 01:50:36.851041', 1, 1);
+insert into storm_friendlink values (2, '为知笔记', '我的为知笔记', 'https://note.wiz.cn/wapp/recent/e3504770-bed9-11e8-a806-a1de6ac63251?docGuid=15e798b0-bfeb-11e9-8a4c-ddb19507dd82', '', '2019-08-17 01:50:36.851041', 1, 1);
+insert into storm_friendlink values (3, '崔庆才BLOG', '崔庆才的博客', 'https://cuiqingcai.com/', '', '2019-08-17 01:50:36.851041', 1, 1);
