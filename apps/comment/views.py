@@ -28,7 +28,7 @@ def confirm(new_content, comment_post_ID, auser):
 @csrf_exempt
 @require_POST
 def AddcommentView(request):
-    print('ssssss')
+    print('---评论---')
     if request.is_ajax():
         data = request.POST
         # 评论内容哦你

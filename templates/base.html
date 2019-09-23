@@ -8,10 +8,9 @@
     <meta name="baidu-tc-verification" content="0fb041a64ee71333c957d8c784961cc8"/>
     <meta property="qc:admins" content="145637425211673116375"/>
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <!-- All in One SEO Pack 2.3.12.2.1 by Michael Torbert of Semper Fi Web Design[392,409] -->
-    <link rel="stylesheet" href="/static/css/search-form.css">
+    <!--<link rel="stylesheet" href="/static/css/search-form.css">-->
     {% block description %}
     {% endblock description %}
 
@@ -154,8 +153,6 @@
     </script>
     <script type='text/javascript' src='{% static 'js/crayon.min.js' %}'></script>
     <script type='text/javascript' src='{% static 'js/jquery.fitvids.js' %}'></script>
-    {% block login_js %}
-    {% endblock login_js %}
     <style>
         .latex_thm,
         .latex_lem,
@@ -348,7 +345,7 @@
 
         <!--公告-->
         <div class="toptip">
-            <!-- <strong class="text-success"><i class="fa fa-volume-up"></i></strong>{% get_active %} -->
+            <!--<strong class="text-success"><i class="fa fa-volume-up"></i></strong>{% get_active %}-->
             <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎欢迎~~~
         </div>
         <!--公告结束-->
@@ -367,8 +364,9 @@
 <footer class="footer">
     <div class="footer-inner">
         <div class="copyright pull-left">
-            <a href="/" title="静觅">SmallSpider</a> 版权所有丨采用
-            <a href="http://yusi123.com/"> 欲思 </a>主题丨
+            <a href="/" title="静觅">SmallSpider</a>
+{#            <a href="/" title="静觅">SmallSpider</a> 版权所有丨采用#}
+{#            <a href="http://yusi123.com/"> 欲思 </a>主题丨#}
             {#            <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于#}
             {#            <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">腾讯云主机</a> &#}
             {#            <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 </a>丨#}
@@ -378,12 +376,9 @@
 </footer>
 <!--网站底部结束-->
 
-<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css'
-      media='all' property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all'
-      property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all'
-      property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css' media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all' property='stylesheet'/>
 <script type='text/javascript' src='{% static 'js/jquery.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/wp-embed.min.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/jquery.nivo.slider.pack.js' %}'></script>
@@ -416,11 +411,6 @@
         })
     });
 </script>
-
-<div class="rollto" style="display: block;">
-    <button class="btn btn-inverse" data-type="totop" title="回顶部"><i class="fa fa-arrow-up"></i></button>
-</div>
-
 </body>
 
 </html>

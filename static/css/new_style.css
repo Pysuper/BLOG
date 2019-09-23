@@ -1,5 +1,5 @@
-﻿﻿@font-face {
-	font-family:FontAwesome;src:url(../fonts/fontawesome-webfont.eot);src:url(../fonts/fontawesome-webfont.eot) format('embedded-opentype'),url(../fonts/fontawesome-webfont.woff) format('woff'),url(../fonts/fontawesome-webfont.ttf) format('truetype'),url(../fonts/fontawesome-webfont.svg) format('svg');font-weight:400;font-style:normal
+﻿@font-face {
+	font-family:FontAwesome;src:url(fonts/fontawesome-webfont.eot?v=4.1.0);src:url(fonts/fontawesome-webfont.eot?#iefix&v=4.1.0) format('embedded-opentype'),url(fonts/fontawesome-webfont.woff?v=4.1.0) format('woff'),url(fonts/fontawesome-webfont.ttf?v=4.1.0) format('truetype'),url(fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular) format('svg');font-weight:400;font-style:normal
 }
 
 .fa {
@@ -2130,7 +2130,7 @@ a.text-success:focus,a.text-success:hover {
 
 h1,h2,h3,h4,h5 {
 	margin: 5px 0;
-	font-weight: bold;
+	font-weight: blod;
 	line-height: 35px;
 	color: inherit;
 	text-rendering: optimizelegibility
@@ -2815,7 +2815,7 @@ input:focus,input:hover,textarea:focus,textarea:hover {
 
 input[type=radio],input[type=checkbox] {
 	margin: 4px 0 0;
-	margin-top: 1px\9;
+	margin-top: 1px;
 	line-height: normal
 }
 
@@ -3486,7 +3486,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 }
 
 #header {
-	background: none repeat scroll 0 0 rgba(4, 26, 68, 0.7);
+	background: none repeat scroll 0 0 rgba(213,100,100,1);
 	position: relative
 }
 
@@ -3522,7 +3522,6 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 }
 
 .navbar .nav li a {
-	width: 100px;
 	padding: 16px 20px;
 	color: #fff
 }
@@ -3586,7 +3585,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 }
 
 .navbar .nav li.current-menu-item a,.navbar .nav li.current-menu-parent a,.navbar .nav li.current-post-ancestor a,.navbar .nav li.current_page_item a,.navbar .nav li:hover a {
-	background-color: #FF5722
+	background-color: #D56464
 }
 
 .sub-menu {
@@ -3829,7 +3828,7 @@ button.btn::-moz-focus-inner,input[type=submit].btn::-moz-focus-inner {
 	margin-top: 0;
 	right: 0;
 	padding: 16px 19px 15px 19px;
-	background: none repeat scroll 0 0 #009688;
+	background: none repeat scroll 0 0 #D56464;
 	color: #fff;
 	cursor: pointer;
 	-webkit-transition: all .25s ease-out;
@@ -4954,7 +4953,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 	font-weight: blod;
 	margin: 20px -20px 20px -24px;
 	padding: 10px 20px 9px 10px;
-	line-height: 18px;
+	line-height: 30px;
 	border-left: 4px solid #00a67c;
 	background-color: #fbfbfb
 }
@@ -5739,7 +5738,6 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 .d_tags a {
 	width: 44%;
 	opacity: .7;
-	text-align: center;
 	filter: alpha(opacity=80);
 	color: #fff;
 	background-color: #00a67c;
@@ -5822,7 +5820,6 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 }
 
 .widget_archive li {
-	text-align: center;
 	width: 50%;
 	float: left;
 	margin-bottom: 5px
@@ -5894,7 +5891,8 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 	position: relative;
 	background: #fbfdfb;
 	border: 1px #eee solid;
-	font-size: 15px
+	font-size: 15px;
+	word-wrap: break-word;
 }
 
 .c-meta {
@@ -6351,7 +6349,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 
 .article-content pre {
 	text-indent: 0;
-	/*background-color: #0c0c0c;*/
+	background-color: #f8f8f8;
 	border: 1px solid #eee;
 	overflow: hidden;
 	padding: 8px;
@@ -6963,7 +6961,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 	display: none
 }
 
-.tui . {
+.tui {
 	display: none
 }
 
@@ -7082,7 +7080,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 	z-index: 60;
 	height: 7.1em;
 	width: 7.1em;
-	background-image: url(../images/arrows.png);
+	background-image: url(img/arrows.png);
 	background-size: 200%
 }
 
@@ -7130,11 +7128,11 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 }
 
 #wowslider-container1 .ws_pause {
-	background-image: url(../images/pause.png)
+	background-image: url(img/pause.png)
 }
 
 #wowslider-container1 .ws_play {
-	background-image: url(../images/play.png)
+	background-image: url(img/play.png)
 }
 
 #wowslider-container1 .ws_pause:hover,#wowslider-container1 .ws_play:hover {
@@ -7697,6 +7695,21 @@ span .action-popover .popover-content .bds_more {
 	float: initial!important
 }
 
-.highlighted {
-    color: #ea6f5a;
+.comt-box .tiantest-box-pc {
+	height: 50px !important;
+}
+
+.comt-box .tiantest-root-white-theme .tiantest-info-box {
+	border-radius: 5px;
+    border: 1px solid #5fcec0;
+    height: 34px;
+}
+
+
+.comt-box .tiantest-root-white-theme .tiantest-box .iconmethod-draw-image {
+	color: #5fcec0;
+}
+
+.comt-box .tiantest-root-white-theme .tiantest-info {
+	color: #5fcec0;
 }

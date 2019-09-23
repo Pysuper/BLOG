@@ -5,12 +5,12 @@ urlpatterns = [
     # 首页
     url(r'^$', IndexView.as_view(template_name='index.html'), name='index'),  # 主页，自然排序
     url(r'^link/$', LinkView, name='link'),     # 申请友情链接
-    url(r'^category/message/$', MessageView, name='message'),
-    url(r'^category/about/$', AboutView, name='about'),
-    url(r'^category/donate/$', DonateView, name='donate'),
-    url(r'^category/exchange/$', ExchangeView, name='exchange'),
-    url(r'^category/project/$', ProjectView, name='project'),
-    url(r'^category/question/$', QuestionView, name='question'),
+    url(r'^category/message/$', MessageView, name='message'),   # 给我留言
+    url(r'^category/about/$', AboutView, name='about'), # 关于作者
+    url(r'^category/donate/$', DonateView, name='donate'),  # 打赏作者
+    url(r'^category/exchange/$', ExchangeView, name='exchange'),    # 技术交流
+    url(r'^category/project/$', ProjectView, name='project'),   # 项目合作
+    url(r'^category/question/$', QuestionView, name='question'),    # 提问交流
     # 分类页面
     url(r'^category/(?P<bigslug>.*?)/(?P<slug>.*?)', IndexView.as_view(template_name='content.html'), name='category'),
     # 归档页面
