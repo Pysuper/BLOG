@@ -79,6 +79,7 @@ def get_carousel_index():
 # 获取右侧栏热门专题幻灯片查询集
 @register.simple_tag
 def get_carousel_right():
+    # 这里是怎么确定是不是热门的呢？ ==> 只是几张图片 5<id<10
     return Carousel.objects.filter(number__gt=5, number__lte=10)
 
 
