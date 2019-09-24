@@ -57,7 +57,7 @@
                                     </span>
                                 </p>
                                 <!--这里的class不能都为1-->
-                                <span class="label label-1">{{ forloop.counter }}</span>
+                                <span class="label label-{{ forloop.counter }}">{{ forloop.counter }}</span>
                                 <a href="/article/{{ hot.slug }}" title="{{ hot.title }}">{{ hot.title }}</a>
                             </li>
                         {% endfor %}
