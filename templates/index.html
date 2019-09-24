@@ -45,14 +45,16 @@
                 <div class="hot-posts">
                     <h2 class="title">热门排行</h2>
                     <ul>
-                        {% get_article_list 'views' 5 as hot_article %}
+{#                        {% get_article_list 'views' 5 as hot_article %}#}
+                        {% get_article_list '-loves' 5 as hot_article %} <!--这里是发送的sort ==> 添加'-' -倒序 -->
                         {% for hot in hot_article %}
                             <li>
                                 <p>
                                     <span class="muted">
                                     <a href="javascript:;" data-action="ding" data-id="{{ hot.id }}" id="Addlike" class="action">
                                         <i class="fa fa-heart-o"></i>
-                                        <span class="count">{{ hot.loves }}</span> 喜欢
+                                        <span class="count">{{ hot.loves }}</span>
+                                        <!--<span class="count">{{ hot.views }}</span> 浏览-->
                                     </a>
                                     </span>
                                 </p>

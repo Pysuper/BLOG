@@ -3,57 +3,57 @@
 {% block title %}{{ object.title }}{% endblock title %}
 {% block description %}
     <meta name="description" content="{{ object.summary }}"/>
-    {% endblock description %}
+{% endblock description %}
 {% block keywords %}
     <meta name="keywords" content="{% get_article_keywords object %}"/>
-    {% endblock keywords %}
+{% endblock keywords %}
 
 
 
 {% block body %}
-<div class="content-wrap">
-    <div class="content">
-        <div class="breadcrumbs">
-            <a title="返回首页" href="/"><i class="fa fa-home"></i></a><small>></small>
-            <a href="/category/{{ object.category.bigcategory.slug }}">{{ object.category.bigcategory.name }}</a>
-            <small>></small>
-            <a
-                href="/category/{{ object.category.bigcategory.slug }}/{{ object.category.name|lower }}">{{ object.category.name }}</a>
-            <small>></small> <span class="muted">{{ object.title }}</span>
-        </div>
-        <header class="article-header">
-            <h1 class="article-title"><a href="/article/{{ object.slug }}">{{ object.title }}</a></h1>
-            <div class="meta">
+    <div class="content-wrap">
+        <div class="content">
+            <div class="breadcrumbs">
+                <a title="返回首页" href="/"><i class="fa fa-home"></i></a><small>></small>
+                <a href="/category/{{ object.category.bigcategory.slug }}">{{ object.category.bigcategory.name }}</a>
+                <small>></small>
+                <a
+                        href="/category/{{ object.category.bigcategory.slug }}/{{ object.category.name|lower }}">{{ object.category.name }}</a>
+                <small>></small> <span class="muted">{{ object.title }}</span>
+            </div>
+            <header class="article-header">
+                <h1 class="article-title"><a href="/article/{{ object.slug }}">{{ object.title }}</a></h1>
+                <div class="meta">
                 <span id="mute-category" class="muted">
                     <i class="fa fa-list-alt"></i>
                     <a href="category/technique/{{ object.category.name|lower }}"> {{ object.category.name }}</a>
                 </span>
-                <span class="muted">
+                    <span class="muted">
                     <i class="fa fa-user"></i>
                     <a href="/author/{{ object.author.name }}">{{ object.author }}</a>
                 </span>
-                <time class="muted"><i class="fa fa-clock-o"></i> {{ object.create_date|date:'y-m-d' }}</time>
-                <span class="muted"><i class="fa fa-eye"></i> {{ object.views }}浏览</span>
-                <span class="muted">
+                    <time class="muted"><i class="fa fa-clock-o"></i> {{ object.create_date|date:'y-m-d' }}</time>
+                    <span class="muted"><i class="fa fa-eye"></i> {{ object.views }}浏览</span>
+                    <span class="muted">
                     <i class="fa fa-comments-o"></i>
                     <a href="/article/{{ object.slug }}#respond">0评论</a>
                 </span>
-            </div>
-        </header>
-        <article class="article-content">
-            {{ article.body | safe }}
-            <p>转载请注明：
-                <a href="{% url 'blog:article' object.slug %}">StormSha</a> &raquo;
-                <a href="{% url 'blog:article' object.slug %}">{{ object.title }}</a>
-            </p>
+                </div>
+            </header>
+            <article class="article-content">
+                {{ article.body | safe }}
+                <p>转载请注明：
+                    <a href="{% url 'blog:article' object.slug %}">SmallSpider</a> &raquo;
+                    <a href="{% url 'blog:article' object.slug %}">{{ object.title }}</a>
+                </p>
 
 
-            <div class="article-social">
-                <a href="javascript:;" data-action="ding" data-id="{{ object.id }}" id="Addlike" class="action">
-                    <i class="fa fa-heart-o"></i>喜欢 (<span class="count">{{ object.loves }}</span>)
-                </a>
-                <span class="or">or</span>
-                <span class="action action-share bdsharebuttonbox"><i class="fa fa-share-alt"></i>分享 (
+                <div class="article-social">
+                    <a href="javascript:;" data-action="ding" data-id="{{ object.id }}" id="Addlike" class="action">
+                        <i class="fa fa-heart-o"></i>喜欢 (<span class="count">{{ object.loves }}</span>)
+                    </a>
+                    <span class="or">or</span>
+                    <span class="action action-share bdsharebuttonbox"><i class="fa fa-share-alt"></i>分享 (
                     <span class="bds_count" data-cmd="count" title="累计分享0次">0</span>)
                     <div class="action-popover">
                         <div class="popover top in">
@@ -70,9 +70,9 @@
                         </div>
                     </div>
                 </span>
-            </div>
-        </article>
-        <!--
+                </div>
+            </article>
+            <!--
         <div class="">
             <div id="qrcodes">
                 <div class="row">
@@ -1134,59 +1134,60 @@
             </p>
         </div>
         -->
-        <footer class="article-footer">
-            <!--文章标签-->
-            <div class="article-tags">
-                <i class="fa fa-tags"></i>
-                {% get_article_tag object.id as tags %}
-                {% for tag in tags %}
-                <a href="{% url 'blog:tag' tag.slug %}" rel="tag">{{ tag.name }}</a>
-                {% endfor %}
-            </div>
-            <!--文章标签结束-->
-
-        </footer>
-        <!--推荐文章-->
-        <nav class="article-nav">
-            <span class="article-nav-prev">
-                <i class="fa fa-angle-double-left"></i>
-                {% get_article_previous object.id as article_previous %}
-                <a href="{% url 'blog:article'  article_previous.slug %}" rel="prev">{{ article_previous.title }}</a>
-            </span>
-            <span class="article-nav-next">
-                {% get_article_next object.id as article_next %}
-                <a href="{% url 'blog:article'  article_next.slug %}" rel="prev">{{ article_next.title }}</a>
-                <i class="fa fa-angle-double-right"></i>
-            </span>
-        </nav>
-
-        <div class="related_top">
-            <div class="related_posts">
-                <ul class="related_img">
-                    {% get_category_article as  category_article %}
-                    {% for article in category_article.article_4 %}
-                    <li class="related_box">
-                        <a href="{% url 'blog:article' article.slug %}" title="{{ article.title }}" target="_blank">
-                            <img src="{{ article.img_link }}" alt="{{ article.title }}" /> <br><span
-                                class="r_title">{{ article.title }}</span></a>
-                    </li>
+            <footer class="article-footer">
+                <!--文章标签-->
+                <div class="article-tags">
+                    <i class="fa fa-tags"></i>
+                    {% get_article_tag object.id as tags %}
+                    {% for tag in tags %}
+                        <a href="{% url 'blog:tag' tag.slug %}" rel="tag">{{ tag.name }}</a>
                     {% endfor %}
-                </ul>
+                </div>
+                <!--文章标签结束-->
 
-                <div class="relates">
-                    <ul>
-                        {% for article in category_article.article_8 %}
-                        <li>
-                            <i class="fa fa-minus"></i>
-                            <a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a>
-                        </li>
+            </footer>
+            <!--推荐文章-->
+            <nav class="article-nav">
+                <span class="article-nav-prev">
+                    <i class="fa fa-angle-double-left"></i>
+                    {% get_article_previous object.id as article_previous %}
+                    <a href="{% url 'blog:article' article_previous.slug %}" rel="prev">{{ article_previous.title }}</a>
+                </span>
+                <span class="article-nav-next">
+                    {% get_article_next object.id as article_next %}
+                    <a href="{% url 'blog:article' article_next.slug %}" rel="prev">{{ article_next.title }}</a>
+                    <i class="fa fa-angle-double-right"></i>
+                </span>
+            </nav>
+
+            <div class="related_top">
+                <div class="related_posts">
+                    <ul class="related_img">
+                        {% get_category_article as  category_article %}
+                        {% for article in category_article.article_4 %}
+                            <li class="related_box">
+                                <a href="{% url 'blog:article' article.slug %}" title="{{ article.title }}"
+                                   target="_blank">
+                                    <img src="{{ article.img_link }}" alt="{{ article.title }}"/> <br><span
+                                        class="r_title">{{ article.title }}</span></a>
+                            </li>
                         {% endfor %}
                     </ul>
+
+                    <div class="relates">
+                        <ul>
+                            {% for article in category_article.article_8 %}
+                                <li>
+                                    <i class="fa fa-minus"></i>
+                                    <a href="{% url 'blog:article' article.slug %}">{{ article.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {% include 'comment_list.html' %}
+            {% include 'comment_list.html' %}
+        </div>
     </div>
-</div>
 {% endblock body %}

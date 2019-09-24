@@ -13,7 +13,7 @@
             </div>
             {% endif %}
 
-            {% if request.session.nick|default:'' != '' %}
+            {% if request.session.nick|default:'' != '' %}经点过赞啦
             {% get_tourist_data request.session.tid as tourist %}
             <div class="comt-avatar pull-left">
                 <img alt='' src='/media/avatar' class='avatar avatar-54 photo avatar-default' height='54' width='54' />

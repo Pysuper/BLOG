@@ -5791,7 +5791,8 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 }
 
 .d_postlist .muted {
-	padding-left: 10px
+	/*padding-left: 10px*/
+	padding-left: 5px;
 }
 
 .d_postlist .nopic li a {
@@ -7475,16 +7476,34 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 	top: -1px
 }
 
+/*.label-1 {*/
+/*	background-color: #fd8c84*/
+/*}*/
+
+/*.label-2 {*/
+/*	background-color: #6fc299*/
+/*}*/
+
+/*.label-3 {*/
+/*	background-color: #81c1f2*/
+/*}*/
+
 .label-1 {
-	background-color: #fd8c84
+	background-color: #FF5722
 }
 
 .label-2 {
-	background-color: #6fc299
+	background-color: #FFB800
 }
 
 .label-3 {
-	background-color: #81c1f2
+	background-color: #5FB878
+}
+.label-4 {
+	background-color: #1E9FFF
+}
+.label-5 {
+	background-color: #2F4056
 }
 
 .fenye {

@@ -86,7 +86,7 @@ def get_carousel_right():
 # 获取热门排行数据查询集，参数：sort 文章类型， num 数量
 @register.simple_tag
 def get_article_list(sort=None, num=None):
-    """获取指定排序方式和指定数量的文章"""
+    """获取指定排序方式和指定数量的文章 ==> 怎么设置成降序排列 ==> 前端就传-views， -loves"""
     if sort:
         if num:
             return Article.objects.order_by(sort)[:num]
@@ -130,11 +130,11 @@ def get_article_previous(article_id):
     while not has_previous and id_previous >= 1:
         article_previous = Article.objects.filter(id=id_previous - 1).first()
         if not article_previous:
-            id_previous -= 1
+            id_previous = id_previous -1
         else:
             has_previous = True
     if has_previous:
-        article = Article.objects.filter(id=id_previous).first()
+        article = Article.objects.filter(id=id_previous - 1).first()
         return article
     else:
         return
@@ -154,7 +154,7 @@ def get_article_next(article_id):
         else:
             has_next = True
     if has_next:
-        article = Article.objects.filter(id=id_next).first()
+        article = Article.objects.filter(id=id_next+1).first()
         return article
     else:
         return
@@ -204,4 +204,3 @@ def my_highlight(text, q):
         except:
             pass
     return text
-
