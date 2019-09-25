@@ -1,534 +1,529 @@
-!
-    function (b) {
-        b(function () {
-            b.support.transition = function () {
-                var c = function () {
-                    var f, e = document.createElement("bootstrap"),
-                        d = {
-                            WebkitTransition: "webkitTransitionEnd",
-                            MozTransition: "transitionend",
-                            OTransition: "oTransitionEnd otransitionend",
-                            transition: "transitionend"
-                        };
-                    for (f in d) {
-                        if (void 0 !== e.style[f]) {
-                            return d[f]
-                        }
-                    }
-                }();
-                return c && {
-                    end: c
-                }
-            }()
-        })
-    }(window.jQuery),
-    !
-        function (e) {
-            var f, d = function (a, g) {
-                this.options = g,
-                    this.$element = e(a).delegate('[data-dismiss="modal"]', "click.dismiss.modal", e.proxy(this.hide, this)),
-                this.options.remote && this.$element.find(".modal-body").load(this.options.remote)
-            };
-            d.prototype = {
-                constructor: d,
-                toggle: function () {
-                    return this[this.isShown ? "hide" : "show"]()
-                },
-                show: function () {
-                    var a = this,
-                        g = e.Event("show");
-                    this.$element.trigger(g),
-                    this.isShown || g.isDefaultPrevented() || (this.isShown = !0, this.escape(), this.backdrop(function () {
-                        var b = e.support.transition && a.$element.hasClass("fade");
-                        a.$element.parent().length || a.$element.appendTo(document.body),
-                            a.$element.show(),
-                        b && a.$element[0].offsetWidth,
-                            a.$element.addClass("in").attr("aria-hidden", !1),
-                            a.enforceFocus(),
-                            b ? a.$element.one(e.support.transition.end,
-                                function () {
-                                    a.$element.focus().trigger("shown")
-                                }) : a.$element.focus().trigger("shown")
-                    }))
-                },
-                hide: function (a) {
-                    a && a.preventDefault(),
-                        a = e.Event("hide"),
-                        this.$element.trigger(a),
-                    this.isShown && !a.isDefaultPrevented() && (this.isShown = !1, this.escape(), e(document).off("focusin.modal"), this.$element.removeClass("in").attr("aria-hidden", !0), e.support.transition && this.$element.hasClass("fade") ? this.hideWithTransition() : this.hideModal())
-                },
-                enforceFocus: function () {
-                    var a = this;
-                    e(document).on("focusin.modal",
-                        function (b) {
-                            a.$element[0] === b.target || a.$element.has(b.target).length || a.$element.focus()
-                        })
-                },
-                escape: function () {
-                    var b = this;
-                    this.isShown && this.options.keyboard ? this.$element.on("keyup.dismiss.modal",
-                        function (a) {
-                            27 == a.which && b.hide()
-                        }) : this.isShown || this.$element.off("keyup.dismiss.modal")
-                },
-                hideWithTransition: function () {
-                    var a = this,
-                        g = setTimeout(function () {
-                                a.$element.off(e.support.transition.end),
-                                    a.hideModal()
-                            },
-                            500);
-                    this.$element.one(e.support.transition.end,
-                        function () {
-                            clearTimeout(g),
-                                a.hideModal()
-                        })
-                },
-                hideModal: function () {
-                    var b = this;
-                    this.$element.hide(),
-                        this.backdrop(function () {
-                            b.removeBackdrop(),
-                                b.$element.trigger("hidden")
-                        })
-                },
-                removeBackdrop: function () {
-                    this.$backdrop && this.$backdrop.remove(),
-                        this.$backdrop = null
-                },
-                backdrop: function (a) {
-                    var c, g = this.$element.hasClass("fade") ? "fade" : "";
-                    if (this.isShown && this.options.backdrop) {
-                        if (c = e.support.transition && g, this.$backdrop = e('<div class="modal-backdrop ' + g + '" />').appendTo(document.body), this.$backdrop.click("static" == this.options.backdrop ? e.proxy(this.$element[0].focus, this.$element[0]) : e.proxy(this.hide, this)), c && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !a) {
-                            return
-                        }
-                        c ? this.$backdrop.one(e.support.transition.end, a) : a()
-                    } else {
-                        !this.isShown && this.$backdrop ? (this.$backdrop.removeClass("in"), e.support.transition && this.$element.hasClass("fade") ? this.$backdrop.one(e.support.transition.end, a) : a()) : a && a()
+!function (b) {
+    b(function () {
+        b.support.transition = function () {
+            var c = function () {
+                var f, e = document.createElement("bootstrap"),
+                    d = {
+                        WebkitTransition: "webkitTransitionEnd",
+                        MozTransition: "transitionend",
+                        OTransition: "oTransitionEnd otransitionend",
+                        transition: "transitionend"
+                    };
+                for (f in d) {
+                    if (void 0 !== e.style[f]) {
+                        return d[f]
                     }
                 }
-            },
-                f = e.fn.modal,
-                e.fn.modal = function (a) {
-                    return this.each(function () {
-                        var g = e(this),
-                            c = g.data("modal"),
-                            b = e.extend({},
-                                e.fn.modal.defaults, g.data(), "object" == typeof a && a);
-                        c || g.data("modal", c = new d(this, b)),
-                            "string" == typeof a ? c[a]() : b.show && c.show()
-                    })
-                },
-                e.fn.modal.defaults = {
-                    backdrop: !0,
-                    keyboard: !0,
-                    show: !0
-                },
-                e.fn.modal.Constructor = d,
-                e.fn.modal.noConflict = function () {
-                    return e.fn.modal = f,
-                        this
-                },
-                e(document).on("click.modal.data-api", '[data-toggle="modal"]',
-                    function (a) {
-                        var j = e(this),
-                            i = j.attr("href"),
-                            h = e(j.attr("data-target") || i && i.replace(/.*(?=#[^\s]+$)/, "")),
-                            g = h.data("modal") ? "toggle" : e.extend({
-                                    remote: !/#/.test(i) && i
-                                },
-                                h.data(), j.data());
-                        a.preventDefault(),
-                            h.modal(g).one("hide",
-                                function () {
-                                    j.focus()
-                                })
-                    })
-        }(window.jQuery),
-    !
-        function (h) {
-            function k() {
-                h(g).each(function () {
-                    j(h(this)).removeClass("open")
-                })
+            }();
+            return c && {
+                end: c
             }
+        }()
+    })
+}(window.jQuery),
 
-            function j(a) {
-                var e, f = a.attr("data-target");
-                return f || (f = a.attr("href"), f = f && /#/.test(f) && f.replace(/.*(?=#[^\s]*$)/, "")),
-                    e = f && h(f),
-                e && e.length || (e = a.parent()),
-                    e
-            }
-
-            var i, g = "[data-toggle=dropdown]",
-                l = function (a) {
-                    var d = h(a).on("click.dropdown.data-api", this.toggle);
-                    h("html").on("click.dropdown.data-api",
-                        function () {
-                            d.parent().removeClass("open")
-                        })
-                };
-            l.prototype = {
-                constructor: l,
-                toggle: function () {
-                    var b, a, d = h(this);
-                    if (!d.is(".disabled, :disabled")) {
-                        return b = j(d),
-                            a = b.hasClass("open"),
-                            k(),
-                        a || b.toggleClass("open"),
-                            d.focus(),
-                            !1
-                    }
-                },
-                keydown: function (p) {
-                    var o, m, e, b, a;
-                    if (/(38|40|27)/.test(p.keyCode) && (o = h(this), p.preventDefault(), p.stopPropagation(), !o.is(".disabled, :disabled"))) {
-                        if (e = j(o), b = e.hasClass("open"), !b || b && 27 == p.keyCode) {
-                            return 27 == p.which && e.find(g).focus(),
-                                o.click()
-                        }
-                        m = h("[role=menu] li:not(.divider):visible a", e),
-                        m.length && (a = m.index(m.filter(":focus")), 38 == p.keyCode && a > 0 && a--, 40 == p.keyCode && a < m.length - 1 && a++, ~a || (a = 0), m.eq(a).focus())
-                    }
-                }
+    !function (e) {
+        var f, d = function (a, g) {
+            this.options = g,
+                this.$element = e(a).delegate('[data-dismiss="modal"]', "click.dismiss.modal", e.proxy(this.hide, this)),
+            this.options.remote && this.$element.find(".modal-body").load(this.options.remote)
+        };
+        d.prototype = {
+            constructor: d,
+            toggle: function () {
+                return this[this.isShown ? "hide" : "show"]()
             },
-                i = h.fn.dropdown,
-                h.fn.dropdown = function (a) {
-                    return this.each(function () {
-                        var c = h(this),
-                            b = c.data("dropdown");
-                        b || c.data("dropdown", b = new l(this)),
-                        "string" == typeof a && b[a].call(c)
-                    })
-                },
-                h.fn.dropdown.Constructor = l,
-                h.fn.dropdown.noConflict = function () {
-                    return h.fn.dropdown = i,
-                        this
-                },
-                h(document).on("click.dropdown.data-api", k).on("click.dropdown.data-api", ".dropdown form",
-                    function (b) {
-                        b.stopPropagation()
-                    }).on("click.dropdown-menu",
-                    function (b) {
-                        b.stopPropagation()
-                    }).on("click.dropdown.data-api", g, l.prototype.toggle).on("keydown.dropdown.data-api", g + ", [role=menu]", l.prototype.keydown)
-        }(window.jQuery),
-    !
-        function (e) {
-            var f, d = function (a) {
-                this.element = e(a)
-            };
-            d.prototype = {
-                constructor: d,
-                show: function () {
-                    var j, i, h, a = this.element,
-                        l = a.closest("ul:not(.dropdown-menu)"),
-                        k = a.attr("data-target");
-                    k || (k = a.attr("href"), k = k && k.replace(/.*(?=#[^\s]*$)/, "")),
-                    a.parent("li").hasClass("active") || (j = l.find(".active:last a")[0], h = e.Event("show", {
-                        relatedTarget: j
-                    }), a.trigger(h), h.isDefaultPrevented() || (i = e(k), this.activate(a.parent("li"), l), this.activate(i, i.parent(),
-                        function () {
-                            a.trigger({
-                                type: "shown",
-                                relatedTarget: j
-                            })
-                        })))
-                },
-                activate: function (a, l, k) {
-                    function h() {
-                        j.removeClass("active").find("> .dropdown-menu > .active").removeClass("active"),
-                            a.addClass("active"),
-                            i ? (a[0].offsetWidth, a.addClass("in")) : a.removeClass("fade"),
-                        a.parent(".dropdown-menu") && a.closest("li.dropdown").addClass("active"),
-                        k && k()
-                    }
-
-                    var j = l.find("> .active"),
-                        i = k && e.support.transition && j.hasClass("fade");
-                    i ? j.one(e.support.transition.end, h) : h(),
-                        j.removeClass("in")
-                }
-            },
-                f = e.fn.tab,
-                e.fn.tab = function (a) {
-                    return this.each(function () {
-                        var c = e(this),
-                            b = c.data("tab");
-                        b || c.data("tab", b = new d(this)),
-                        "string" == typeof a && b[a]()
-                    })
-                },
-                e.fn.tab.Constructor = d,
-                e.fn.tab.noConflict = function () {
-                    return e.fn.tab = f,
-                        this
-                },
-                e(document).on("click.tab.data-api", '[data-toggle="tab"], [data-toggle="pill"]',
-                    function (a) {
-                        a.preventDefault(),
-                            e(this).tab("show")
-                    })
-        }(window.jQuery),
-    !
-        function (e) {
-            var f, d = function (g, c) {
-                this.init("tooltip", g, c)
-            };
-            d.prototype = {
-                constructor: d,
-                init: function (a, q, p) {
-                    var o, m, l, k, j;
-                    for (this.type = a, this.$element = e(q), this.options = this.getOptions(p), this.enabled = !0, l = this.options.trigger.split(" "), j = l.length; j--;) {
-                        k = l[j],
-                            "click" == k ? this.$element.on("click." + this.type, this.options.selector, e.proxy(this.toggle, this)) : "manual" != k && (o = "hover" == k ? "mouseenter" : "focus", m = "hover" == k ? "mouseleave" : "blur", this.$element.on(o + "." + this.type, this.options.selector, e.proxy(this.enter, this)), this.$element.on(m + "." + this.type, this.options.selector, e.proxy(this.leave, this)))
-                    }
-                    this.options.selector ? this._options = e.extend({},
-                        this.options, {
-                            trigger: "manual",
-                            selector: ""
-                        }) : this.fixTitle()
-                },
-                getOptions: function (a) {
-                    return a = e.extend({},
-                        e.fn[this.type].defaults, this.$element.data(), a),
-                    a.delay && "number" == typeof a.delay && (a.delay = {
-                        show: a.delay,
-                        hide: a.delay
-                    }),
-                        a
-                },
-                enter: function (a) {
-                    var g, i = e.fn[this.type].defaults,
-                        h = {};
-                    return this._options && e.each(this._options,
-                        function (j, c) {
-                            i[j] != c && (h[j] = c)
-                        },
-                        this),
-                        g = e(a.currentTarget)[this.type](h).data(this.type),
-                        g.options.delay && g.options.delay.show ? (clearTimeout(this.timeout), g.hoverState = "in", this.timeout = setTimeout(function () {
-                                "in" == g.hoverState && g.show()
-                            },
-                            g.options.delay.show), void 0) : g.show()
-                },
-                leave: function (a) {
-                    var g = e(a.currentTarget)[this.type](this._options).data(this.type);
-                    return this.timeout && clearTimeout(this.timeout),
-                        g.options.delay && g.options.delay.hide ? (g.hoverState = "out", this.timeout = setTimeout(function () {
-                                "out" == g.hoverState && g.hide()
-                            },
-                            g.options.delay.hide), void 0) : g.hide()
-                },
-                show: function () {
-                    var a, o, m, l, k, j, i = e.Event("show");
-                    if (this.hasContent() && this.enabled) {
-                        if (this.$element.trigger(i), i.isDefaultPrevented()) {
-                            return
-                        }
-                        switch (a = this.tip(), this.setContent(), this.options.animation && a.addClass("fade"), k = "function" == typeof this.options.placement ? this.options.placement.call(this, a[0], this.$element[0]) : this.options.placement, a.detach().css({
-                            top: 0,
-                            left: 0,
-                            display: "block"
-                        }), this.options.container ? a.appendTo(this.options.container) : a.insertAfter(this.$element), o = this.getPosition(), m = a[0].offsetWidth, l = a[0].offsetHeight, k) {
-                            case "bottom":
-                                j = {
-                                    top: o.top + o.height,
-                                    left: o.left + o.width / 2 - m / 2
-                                };
-                                break;
-                            case "top":
-                                j = {
-                                    top: o.top - l,
-                                    left: o.left + o.width / 2 - m / 2
-                                };
-                                break;
-                            case "left":
-                                j = {
-                                    top: o.top + o.height / 2 - l / 2,
-                                    left: o.left - m
-                                };
-                                break;
-                            case "right":
-                                j = {
-                                    top: o.top + o.height / 2 - l / 2,
-                                    left: o.left + o.width
-                                }
-                        }
-                        this.applyPlacement(j, k),
-                            this.$element.trigger("shown")
-                    }
-                },
-                applyPlacement: function (s, r) {
-                    var m, l, k, j, q = this.tip(),
-                        p = q[0].offsetWidth,
-                        o = q[0].offsetHeight;
-                    q.offset(s).addClass(r).addClass("in"),
-                        m = q[0].offsetWidth,
-                        l = q[0].offsetHeight,
-                    "top" == r && l != o && (s.top = s.top + o - l, j = !0),
-                        "bottom" == r || "top" == r ? (k = 0, s.left < 0 && (k = -2 * s.left, s.left = 0, q.offset(s), m = q[0].offsetWidth, l = q[0].offsetHeight), this.replaceArrow(k - p + m, m, "left")) : this.replaceArrow(l - o, l, "top"),
-                    j && q.offset(s)
-                },
-                replaceArrow: function (h, g, i) {
-                    this.arrow().css(i, h ? 50 * (1 - h / g) + "%" : "")
-                },
-                setContent: function () {
-                    var g = this.tip(),
-                        c = this.getTitle();
-                    g.find(".tooltip-inner")[this.options.html ? "html" : "text"](c),
-                        g.removeClass("fade in top bottom left right")
-                },
-                hide: function () {
-                    function a() {
-                        var c = setTimeout(function () {
-                                g.off(e.support.transition.end).detach()
-                            },
-                            500);
-                        g.one(e.support.transition.end,
+            show: function () {
+                var a = this,
+                    g = e.Event("show");
+                this.$element.trigger(g),
+                this.isShown || g.isDefaultPrevented() || (this.isShown = !0, this.escape(), this.backdrop(function () {
+                    var b = e.support.transition && a.$element.hasClass("fade");
+                    a.$element.parent().length || a.$element.appendTo(document.body),
+                        a.$element.show(),
+                    b && a.$element[0].offsetWidth,
+                        a.$element.addClass("in").attr("aria-hidden", !1),
+                        a.enforceFocus(),
+                        b ? a.$element.one(e.support.transition.end,
                             function () {
-                                clearTimeout(c),
-                                    g.detach()
-                            })
+                                a.$element.focus().trigger("shown")
+                            }) : a.$element.focus().trigger("shown")
+                }))
+            },
+            hide: function (a) {
+                a && a.preventDefault(),
+                    a = e.Event("hide"),
+                    this.$element.trigger(a),
+                this.isShown && !a.isDefaultPrevented() && (this.isShown = !1, this.escape(), e(document).off("focusin.modal"), this.$element.removeClass("in").attr("aria-hidden", !0), e.support.transition && this.$element.hasClass("fade") ? this.hideWithTransition() : this.hideModal())
+            },
+            enforceFocus: function () {
+                var a = this;
+                e(document).on("focusin.modal",
+                    function (b) {
+                        a.$element[0] === b.target || a.$element.has(b.target).length || a.$element.focus()
+                    })
+            },
+            escape: function () {
+                var b = this;
+                this.isShown && this.options.keyboard ? this.$element.on("keyup.dismiss.modal",
+                    function (a) {
+                        27 == a.which && b.hide()
+                    }) : this.isShown || this.$element.off("keyup.dismiss.modal")
+            },
+            hideWithTransition: function () {
+                var a = this,
+                    g = setTimeout(function () {
+                            a.$element.off(e.support.transition.end),
+                                a.hideModal()
+                        },
+                        500);
+                this.$element.one(e.support.transition.end,
+                    function () {
+                        clearTimeout(g),
+                            a.hideModal()
+                    })
+            },
+            hideModal: function () {
+                var b = this;
+                this.$element.hide(),
+                    this.backdrop(function () {
+                        b.removeBackdrop(),
+                            b.$element.trigger("hidden")
+                    })
+            },
+            removeBackdrop: function () {
+                this.$backdrop && this.$backdrop.remove(),
+                    this.$backdrop = null
+            },
+            backdrop: function (a) {
+                var c, g = this.$element.hasClass("fade") ? "fade" : "";
+                if (this.isShown && this.options.backdrop) {
+                    if (c = e.support.transition && g, this.$backdrop = e('<div class="modal-backdrop ' + g + '" />').appendTo(document.body), this.$backdrop.click("static" == this.options.backdrop ? e.proxy(this.$element[0].focus, this.$element[0]) : e.proxy(this.hide, this)), c && this.$backdrop[0].offsetWidth, this.$backdrop.addClass("in"), !a) {
+                        return
                     }
+                    c ? this.$backdrop.one(e.support.transition.end, a) : a()
+                } else {
+                    !this.isShown && this.$backdrop ? (this.$backdrop.removeClass("in"), e.support.transition && this.$element.hasClass("fade") ? this.$backdrop.one(e.support.transition.end, a) : a()) : a && a()
+                }
+            }
+        },
+            f = e.fn.modal,
+            e.fn.modal = function (a) {
+                return this.each(function () {
+                    var g = e(this),
+                        c = g.data("modal"),
+                        b = e.extend({},
+                            e.fn.modal.defaults, g.data(), "object" == typeof a && a);
+                    c || g.data("modal", c = new d(this, b)),
+                        "string" == typeof a ? c[a]() : b.show && c.show()
+                })
+            },
+            e.fn.modal.defaults = {
+                backdrop: !0,
+                keyboard: !0,
+                show: !0
+            },
+            e.fn.modal.Constructor = d,
+            e.fn.modal.noConflict = function () {
+                return e.fn.modal = f,
+                    this
+            },
+            e(document).on("click.modal.data-api", '[data-toggle="modal"]',
+                function (a) {
+                    var j = e(this),
+                        i = j.attr("href"),
+                        h = e(j.attr("data-target") || i && i.replace(/.*(?=#[^\s]+$)/, "")),
+                        g = h.data("modal") ? "toggle" : e.extend({
+                                remote: !/#/.test(i) && i
+                            },
+                            h.data(), j.data());
+                    a.preventDefault(),
+                        h.modal(g).one("hide",
+                            function () {
+                                j.focus()
+                            })
+                })
+    }(window.jQuery),
+    !function (h) {
+        function k() {
+            h(g).each(function () {
+                j(h(this)).removeClass("open")
+            })
+        }
 
-                    var g = this.tip(),
-                        b = e.Event("hide");
-                    return this.$element.trigger(b),
-                        b.isDefaultPrevented() ? void 0 : (g.removeClass("in"), e.support.transition && this.$tip.hasClass("fade") ? a() : g.detach(), this.$element.trigger("hidden"), this)
-                },
-                fixTitle: function () {
-                    var b = this.$element;
-                    (b.attr("title") || "string" != typeof b.attr("data-original-title")) && b.attr("data-original-title", b.attr("title") || "").attr("title", "")
+        function j(a) {
+            var e, f = a.attr("data-target");
+            return f || (f = a.attr("href"), f = f && /#/.test(f) && f.replace(/.*(?=#[^\s]*$)/, "")),
+                e = f && h(f),
+            e && e.length || (e = a.parent()),
+                e
+        }
+
+        var i, g = "[data-toggle=dropdown]",
+            l = function (a) {
+                var d = h(a).on("click.dropdown.data-api", this.toggle);
+                h("html").on("click.dropdown.data-api",
+                    function () {
+                        d.parent().removeClass("open")
+                    })
+            };
+        l.prototype = {
+            constructor: l,
+            toggle: function () {
+                var b, a, d = h(this);
+                if (!d.is(".disabled, :disabled")) {
+                    return b = j(d),
+                        a = b.hasClass("open"),
+                        k(),
+                    a || b.toggleClass("open"),
+                        d.focus(),
+                        !1
+                }
+            },
+            keydown: function (p) {
+                var o, m, e, b, a;
+                if (/(38|40|27)/.test(p.keyCode) && (o = h(this), p.preventDefault(), p.stopPropagation(), !o.is(".disabled, :disabled"))) {
+                    if (e = j(o), b = e.hasClass("open"), !b || b && 27 == p.keyCode) {
+                        return 27 == p.which && e.find(g).focus(),
+                            o.click()
+                    }
+                    m = h("[role=menu] li:not(.divider):visible a", e),
+                    m.length && (a = m.index(m.filter(":focus")), 38 == p.keyCode && a > 0 && a--, 40 == p.keyCode && a < m.length - 1 && a++, ~a || (a = 0), m.eq(a).focus())
+                }
+            }
+        },
+            i = h.fn.dropdown,
+            h.fn.dropdown = function (a) {
+                return this.each(function () {
+                    var c = h(this),
+                        b = c.data("dropdown");
+                    b || c.data("dropdown", b = new l(this)),
+                    "string" == typeof a && b[a].call(c)
+                })
+            },
+            h.fn.dropdown.Constructor = l,
+            h.fn.dropdown.noConflict = function () {
+                return h.fn.dropdown = i,
+                    this
+            },
+            h(document).on("click.dropdown.data-api", k).on("click.dropdown.data-api", ".dropdown form",
+                function (b) {
+                    b.stopPropagation()
+                }).on("click.dropdown-menu",
+                function (b) {
+                    b.stopPropagation()
+                }).on("click.dropdown.data-api", g, l.prototype.toggle).on("keydown.dropdown.data-api", g + ", [role=menu]", l.prototype.keydown)
+    }(window.jQuery),
+    !function (e) {
+        var f, d = function (a) {
+            this.element = e(a)
+        };
+        d.prototype = {
+            constructor: d,
+            show: function () {
+                var j, i, h, a = this.element,
+                    l = a.closest("ul:not(.dropdown-menu)"),
+                    k = a.attr("data-target");
+                k || (k = a.attr("href"), k = k && k.replace(/.*(?=#[^\s]*$)/, "")),
+                a.parent("li").hasClass("active") || (j = l.find(".active:last a")[0], h = e.Event("show", {
+                    relatedTarget: j
+                }), a.trigger(h), h.isDefaultPrevented() || (i = e(k), this.activate(a.parent("li"), l), this.activate(i, i.parent(),
+                    function () {
+                        a.trigger({
+                            type: "shown",
+                            relatedTarget: j
+                        })
+                    })))
+            },
+            activate: function (a, l, k) {
+                function h() {
+                    j.removeClass("active").find("> .dropdown-menu > .active").removeClass("active"),
+                        a.addClass("active"),
+                        i ? (a[0].offsetWidth, a.addClass("in")) : a.removeClass("fade"),
+                    a.parent(".dropdown-menu") && a.closest("li.dropdown").addClass("active"),
+                    k && k()
+                }
+
+                var j = l.find("> .active"),
+                    i = k && e.support.transition && j.hasClass("fade");
+                i ? j.one(e.support.transition.end, h) : h(),
+                    j.removeClass("in")
+            }
+        },
+            f = e.fn.tab,
+            e.fn.tab = function (a) {
+                return this.each(function () {
+                    var c = e(this),
+                        b = c.data("tab");
+                    b || c.data("tab", b = new d(this)),
+                    "string" == typeof a && b[a]()
+                })
+            },
+            e.fn.tab.Constructor = d,
+            e.fn.tab.noConflict = function () {
+                return e.fn.tab = f,
+                    this
+            },
+            e(document).on("click.tab.data-api", '[data-toggle="tab"], [data-toggle="pill"]',
+                function (a) {
+                    a.preventDefault(),
+                        e(this).tab("show")
+                })
+    }(window.jQuery),
+    !function (e) {
+        var f, d = function (g, c) {
+            this.init("tooltip", g, c)
+        };
+        d.prototype = {
+            constructor: d,
+            init: function (a, q, p) {
+                var o, m, l, k, j;
+                for (this.type = a, this.$element = e(q), this.options = this.getOptions(p), this.enabled = !0, l = this.options.trigger.split(" "), j = l.length; j--;) {
+                    k = l[j],
+                        "click" == k ? this.$element.on("click." + this.type, this.options.selector, e.proxy(this.toggle, this)) : "manual" != k && (o = "hover" == k ? "mouseenter" : "focus", m = "hover" == k ? "mouseleave" : "blur", this.$element.on(o + "." + this.type, this.options.selector, e.proxy(this.enter, this)), this.$element.on(m + "." + this.type, this.options.selector, e.proxy(this.leave, this)))
+                }
+                this.options.selector ? this._options = e.extend({},
+                    this.options, {
+                        trigger: "manual",
+                        selector: ""
+                    }) : this.fixTitle()
+            },
+            getOptions: function (a) {
+                return a = e.extend({},
+                    e.fn[this.type].defaults, this.$element.data(), a),
+                a.delay && "number" == typeof a.delay && (a.delay = {
+                    show: a.delay,
+                    hide: a.delay
+                }),
+                    a
+            },
+            enter: function (a) {
+                var g, i = e.fn[this.type].defaults,
+                    h = {};
+                return this._options && e.each(this._options,
+                    function (j, c) {
+                        i[j] != c && (h[j] = c)
+                    },
+                    this),
+                    g = e(a.currentTarget)[this.type](h).data(this.type),
+                    g.options.delay && g.options.delay.show ? (clearTimeout(this.timeout), g.hoverState = "in", this.timeout = setTimeout(function () {
+                            "in" == g.hoverState && g.show()
+                        },
+                        g.options.delay.show), void 0) : g.show()
+            },
+            leave: function (a) {
+                var g = e(a.currentTarget)[this.type](this._options).data(this.type);
+                return this.timeout && clearTimeout(this.timeout),
+                    g.options.delay && g.options.delay.hide ? (g.hoverState = "out", this.timeout = setTimeout(function () {
+                            "out" == g.hoverState && g.hide()
+                        },
+                        g.options.delay.hide), void 0) : g.hide()
+            },
+            show: function () {
+                var a, o, m, l, k, j, i = e.Event("show");
+                if (this.hasContent() && this.enabled) {
+                    if (this.$element.trigger(i), i.isDefaultPrevented()) {
+                        return
+                    }
+                    switch (a = this.tip(), this.setContent(), this.options.animation && a.addClass("fade"), k = "function" == typeof this.options.placement ? this.options.placement.call(this, a[0], this.$element[0]) : this.options.placement, a.detach().css({
+                        top: 0,
+                        left: 0,
+                        display: "block"
+                    }), this.options.container ? a.appendTo(this.options.container) : a.insertAfter(this.$element), o = this.getPosition(), m = a[0].offsetWidth, l = a[0].offsetHeight, k) {
+                        case "bottom":
+                            j = {
+                                top: o.top + o.height,
+                                left: o.left + o.width / 2 - m / 2
+                            };
+                            break;
+                        case "top":
+                            j = {
+                                top: o.top - l,
+                                left: o.left + o.width / 2 - m / 2
+                            };
+                            break;
+                        case "left":
+                            j = {
+                                top: o.top + o.height / 2 - l / 2,
+                                left: o.left - m
+                            };
+                            break;
+                        case "right":
+                            j = {
+                                top: o.top + o.height / 2 - l / 2,
+                                left: o.left + o.width
+                            }
+                    }
+                    this.applyPlacement(j, k),
+                        this.$element.trigger("shown")
+                }
+            },
+            applyPlacement: function (s, r) {
+                var m, l, k, j, q = this.tip(),
+                    p = q[0].offsetWidth,
+                    o = q[0].offsetHeight;
+                q.offset(s).addClass(r).addClass("in"),
+                    m = q[0].offsetWidth,
+                    l = q[0].offsetHeight,
+                "top" == r && l != o && (s.top = s.top + o - l, j = !0),
+                    "bottom" == r || "top" == r ? (k = 0, s.left < 0 && (k = -2 * s.left, s.left = 0, q.offset(s), m = q[0].offsetWidth, l = q[0].offsetHeight), this.replaceArrow(k - p + m, m, "left")) : this.replaceArrow(l - o, l, "top"),
+                j && q.offset(s)
+            },
+            replaceArrow: function (h, g, i) {
+                this.arrow().css(i, h ? 50 * (1 - h / g) + "%" : "")
+            },
+            setContent: function () {
+                var g = this.tip(),
+                    c = this.getTitle();
+                g.find(".tooltip-inner")[this.options.html ? "html" : "text"](c),
+                    g.removeClass("fade in top bottom left right")
+            },
+            hide: function () {
+                function a() {
+                    var c = setTimeout(function () {
+                            g.off(e.support.transition.end).detach()
+                        },
+                        500);
+                    g.one(e.support.transition.end,
+                        function () {
+                            clearTimeout(c),
+                                g.detach()
+                        })
+                }
+
+                var g = this.tip(),
+                    b = e.Event("hide");
+                return this.$element.trigger(b),
+                    b.isDefaultPrevented() ? void 0 : (g.removeClass("in"), e.support.transition && this.$tip.hasClass("fade") ? a() : g.detach(), this.$element.trigger("hidden"), this)
+            },
+            fixTitle: function () {
+                var b = this.$element;
+                (b.attr("title") || "string" != typeof b.attr("data-original-title")) && b.attr("data-original-title", b.attr("title") || "").attr("title", "")
+            },
+            hasContent: function () {
+                return this.getTitle()
+            },
+            getPosition: function () {
+                var a = this.$element[0];
+                return e.extend({},
+                    "function" == typeof a.getBoundingClientRect ? a.getBoundingClientRect() : {
+                        width: a.offsetWidth,
+                        height: a.offsetHeight
+                    },
+                    this.$element.offset())
+            },
+            getTitle: function () {
+                var h, g = this.$element,
+                    i = this.options;
+                return h = g.attr("data-original-title") || ("function" == typeof i.title ? i.title.call(g[0]) : i.title)
+            },
+            tip: function () {
+                return this.$tip = this.$tip || e(this.options.template)
+            },
+            arrow: function () {
+                return this.$arrow = this.$arrow || this.tip().find(".tooltip-arrow")
+            },
+            validate: function () {
+                this.$element[0].parentNode || (this.hide(), this.$element = null, this.options = null)
+            },
+            enable: function () {
+                this.enabled = !0
+            },
+            disable: function () {
+                this.enabled = !1
+            },
+            toggleEnabled: function () {
+                this.enabled = !this.enabled
+            },
+            toggle: function (a) {
+                var g = a ? e(a.currentTarget)[this.type](this._options).data(this.type) : this;
+                g.tip().hasClass("in") ? g.hide() : g.show()
+            },
+            destroy: function () {
+                this.hide().$element.off("." + this.type).removeData(this.type)
+            }
+        },
+            f = e.fn.tooltip,
+            e.fn.tooltip = function (a) {
+                return this.each(function () {
+                    var g = e(this),
+                        c = g.data("tooltip"),
+                        b = "object" == typeof a && a;
+                    c || g.data("tooltip", c = new d(this, b)),
+                    "string" == typeof a && c[a]()
+                })
+            },
+            e.fn.tooltip.Constructor = d,
+            e.fn.tooltip.defaults = {
+                animation: !0,
+                placement: "top",
+                selector: !1,
+                template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+                trigger: "hover focus",
+                title: "",
+                delay: 0,
+                html: !1,
+                container: !1
+            },
+            e.fn.tooltip.noConflict = function () {
+                return e.fn.tooltip = f,
+                    this
+            }
+    }(window.jQuery),
+    !function (e) {
+        var f, d = function (g, c) {
+            this.init("popover", g, c)
+        };
+        d.prototype = e.extend({},
+            e.fn.tooltip.Constructor.prototype, {
+                constructor: d,
+                setContent: function () {
+                    var h = this.tip(),
+                        g = this.getTitle(),
+                        i = this.getContent();
+                    h.find(".popover-title")[this.options.html ? "html" : "text"](g),
+                        h.find(".popover-content")[this.options.html ? "html" : "text"](i),
+                        h.removeClass("fade top bottom left right in")
                 },
                 hasContent: function () {
-                    return this.getTitle()
+                    return this.getTitle() || this.getContent()
                 },
-                getPosition: function () {
-                    var a = this.$element[0];
-                    return e.extend({},
-                        "function" == typeof a.getBoundingClientRect ? a.getBoundingClientRect() : {
-                            width: a.offsetWidth,
-                            height: a.offsetHeight
-                        },
-                        this.$element.offset())
-                },
-                getTitle: function () {
+                getContent: function () {
                     var h, g = this.$element,
                         i = this.options;
-                    return h = g.attr("data-original-title") || ("function" == typeof i.title ? i.title.call(g[0]) : i.title)
+                    return h = ("function" == typeof i.content ? i.content.call(g[0]) : i.content) || g.attr("data-content")
                 },
                 tip: function () {
-                    return this.$tip = this.$tip || e(this.options.template)
-                },
-                arrow: function () {
-                    return this.$arrow = this.$arrow || this.tip().find(".tooltip-arrow")
-                },
-                validate: function () {
-                    this.$element[0].parentNode || (this.hide(), this.$element = null, this.options = null)
-                },
-                enable: function () {
-                    this.enabled = !0
-                },
-                disable: function () {
-                    this.enabled = !1
-                },
-                toggleEnabled: function () {
-                    this.enabled = !this.enabled
-                },
-                toggle: function (a) {
-                    var g = a ? e(a.currentTarget)[this.type](this._options).data(this.type) : this;
-                    g.tip().hasClass("in") ? g.hide() : g.show()
+                    return this.$tip || (this.$tip = e(this.options.template)),
+                        this.$tip
                 },
                 destroy: function () {
                     this.hide().$element.off("." + this.type).removeData(this.type)
                 }
+            }),
+            f = e.fn.popover,
+            e.fn.popover = function (a) {
+                return this.each(function () {
+                    var g = e(this),
+                        c = g.data("popover"),
+                        b = "object" == typeof a && a;
+                    c || g.data("popover", c = new d(this, b)),
+                    "string" == typeof a && c[a]()
+                })
             },
-                f = e.fn.tooltip,
-                e.fn.tooltip = function (a) {
-                    return this.each(function () {
-                        var g = e(this),
-                            c = g.data("tooltip"),
-                            b = "object" == typeof a && a;
-                        c || g.data("tooltip", c = new d(this, b)),
-                        "string" == typeof a && c[a]()
-                    })
-                },
-                e.fn.tooltip.Constructor = d,
-                e.fn.tooltip.defaults = {
-                    animation: !0,
-                    placement: "top",
-                    selector: !1,
-                    template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
-                    trigger: "hover focus",
-                    title: "",
-                    delay: 0,
-                    html: !1,
-                    container: !1
-                },
-                e.fn.tooltip.noConflict = function () {
-                    return e.fn.tooltip = f,
-                        this
-                }
-        }(window.jQuery),
-    !
-        function (e) {
-            var f, d = function (g, c) {
-                this.init("popover", g, c)
-            };
-            d.prototype = e.extend({},
-                e.fn.tooltip.Constructor.prototype, {
-                    constructor: d,
-                    setContent: function () {
-                        var h = this.tip(),
-                            g = this.getTitle(),
-                            i = this.getContent();
-                        h.find(".popover-title")[this.options.html ? "html" : "text"](g),
-                            h.find(".popover-content")[this.options.html ? "html" : "text"](i),
-                            h.removeClass("fade top bottom left right in")
-                    },
-                    hasContent: function () {
-                        return this.getTitle() || this.getContent()
-                    },
-                    getContent: function () {
-                        var h, g = this.$element,
-                            i = this.options;
-                        return h = ("function" == typeof i.content ? i.content.call(g[0]) : i.content) || g.attr("data-content")
-                    },
-                    tip: function () {
-                        return this.$tip || (this.$tip = e(this.options.template)),
-                            this.$tip
-                    },
-                    destroy: function () {
-                        this.hide().$element.off("." + this.type).removeData(this.type)
-                    }
+            e.fn.popover.Constructor = d,
+            e.fn.popover.defaults = e.extend({},
+                e.fn.tooltip.defaults, {
+                    placement: "right",
+                    trigger: "click",
+                    content: "",
+                    template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
                 }),
-                f = e.fn.popover,
-                e.fn.popover = function (a) {
-                    return this.each(function () {
-                        var g = e(this),
-                            c = g.data("popover"),
-                            b = "object" == typeof a && a;
-                        c || g.data("popover", c = new d(this, b)),
-                        "string" == typeof a && c[a]()
-                    })
-                },
-                e.fn.popover.Constructor = d,
-                e.fn.popover.defaults = e.extend({},
-                    e.fn.tooltip.defaults, {
-                        placement: "right",
-                        trigger: "click",
-                        content: "",
-                        template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-                    }),
-                e.fn.popover.noConflict = function () {
-                    return e.fn.popover = f,
-                        this
-                }
-        }(window.jQuery);
+            e.fn.popover.noConflict = function () {
+                return e.fn.popover = f,
+                    this
+            }
+    }(window.jQuery);
 eval(function (h, b, i, d, g, f) {
     g = function (a) {
         return (a < 62 ? "" : g(parseInt(a / 62))) + ((a = a % 62) > 35 ? String.fromCharCode(a + 29) : a.toString(36))
@@ -885,208 +880,206 @@ eval(function (h, b, i, d, g, f) {
                 }
         }
 })(jQuery);
-!
-    function (g, f, j, i) {
-        var h = g(f);
-        g.fn.lazyload = function (e) {
-            function d() {
-                var k = 0;
-                b.each(function () {
-                    var l = g(this);
-                    if (!a.skip_invisible || l.is(":visible")) {
-                        if (g.abovethetop(this, a) || g.leftofbegin(this, a)) {
-                        } else {
-                            if (g.belowthefold(this, a) || g.rightoffold(this, a)) {
-                                if (++k > a.failure_limit) {
-                                    return !1
-                                }
-                            } else {
-                                l.trigger("appear"),
-                                    k = 0
+!function (g, f, j, i) {
+    var h = g(f);
+    g.fn.lazyload = function (e) {
+        function d() {
+            var k = 0;
+            b.each(function () {
+                var l = g(this);
+                if (!a.skip_invisible || l.is(":visible")) {
+                    if (g.abovethetop(this, a) || g.leftofbegin(this, a)) {
+                    } else {
+                        if (g.belowthefold(this, a) || g.rightoffold(this, a)) {
+                            if (++k > a.failure_limit) {
+                                return !1
                             }
+                        } else {
+                            l.trigger("appear"),
+                                k = 0
                         }
                     }
-                })
-            }
-
-            var c, b = this,
-                a = {
-                    threshold: 0,
-                    failure_limit: 0,
-                    event: "scroll",
-                    effect: "show",
-                    container: f,
-                    data_attribute: "original",
-                    skip_invisible: !0,
-                    appear: null,
-                    load: null,
-                    placeholder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                };
-            return e && (i !== e.failurelimit && (e.failure_limit = e.failurelimit, delete e.failurelimit), i !== e.effectspeed && (e.effect_speed = e.effectspeed, delete e.effectspeed), g.extend(a, e)),
-                c = a.container === i || a.container === f ? h : g(a.container),
-            0 === a.event.indexOf("scroll") && c.bind(a.event,
-                function () {
-                    return d()
-                }),
-                this.each(function () {
-                    var k = this,
-                        l = g(k);
-                    k.loaded = !1,
-                    (l.attr("src") === i || l.attr("src") === !1) && l.attr("src", a.placeholder),
-                        l.one("appear",
-                            function () {
-                                if (!this.loaded) {
-                                    if (a.appear) {
-                                        var m = b.length;
-                                        a.appear.call(k, m, a)
-                                    }
-                                    g("<img />").bind("load",
-                                        function () {
-                                            var q = l.data(a.data_attribute);
-                                            l.hide(),
-                                                l.is("img") ? l.attr("src", q) : l.css("background-image", "url('" + q + "')"),
-                                                l[a.effect](a.effect_speed),
-                                                k.loaded = !0;
-                                            var p = g.grep(b,
-                                                function (r) {
-                                                    return !r.loaded
-                                                });
-                                            if (b = g(p), a.load) {
-                                                var o = b.length;
-                                                a.load.call(k, o, a)
-                                            }
-                                        }).attr("src", l.data(a.data_attribute))
-                                }
-                            }),
-                    0 !== a.event.indexOf("scroll") && l.bind(a.event,
-                        function () {
-                            k.loaded || l.trigger("appear")
-                        })
-                }),
-                h.bind("resize",
-                    function () {
-                        d()
-                    }),
-            /iphone|ipod|ipad.*os 5/gi.test(navigator.appVersion) && h.bind("pageshow",
-                function (k) {
-                    k.originalEvent && k.originalEvent.persisted && b.each(function () {
-                        g(this).trigger("appear")
-                    })
-                }),
-                g(j).ready(function () {
-                    d()
-                }),
-                this
-        },
-            g.belowthefold = function (d, b) {
-                var a;
-                return a = b.container === i || b.container === f ? (f.innerHeight ? f.innerHeight : h.height()) + h.scrollTop() : g(b.container).offset().top + g(b.container).height(),
-                a <= g(d).offset().top - b.threshold
-            },
-            g.rightoffold = function (d, b) {
-                var a;
-                return a = b.container === i || b.container === f ? h.width() + h.scrollLeft() : g(b.container).offset().left + g(b.container).width(),
-                a <= g(d).offset().left - b.threshold
-            },
-            g.abovethetop = function (d, b) {
-                var a;
-                return a = b.container === i || b.container === f ? h.scrollTop() : g(b.container).offset().top,
-                a >= g(d).offset().top + b.threshold + g(d).height()
-            },
-            g.leftofbegin = function (d, b) {
-                var a;
-                return a = b.container === i || b.container === f ? h.scrollLeft() : g(b.container).offset().left,
-                a >= g(d).offset().left + b.threshold + g(d).width()
-            },
-            g.inviewport = function (a, d) {
-                return !(g.rightoffold(a, d) || g.leftofbegin(a, d) || g.belowthefold(a, d) || g.abovethetop(a, d))
-            },
-            g.extend(g.expr[":"], {
-                "below-the-fold": function (a) {
-                    return g.belowthefold(a, {
-                        threshold: 0
-                    })
-                },
-                "above-the-top": function (a) {
-                    return !g.belowthefold(a, {
-                        threshold: 0
-                    })
-                },
-                "right-of-screen": function (a) {
-                    return g.rightoffold(a, {
-                        threshold: 0
-                    })
-                },
-                "left-of-screen": function (a) {
-                    return !g.rightoffold(a, {
-                        threshold: 0
-                    })
-                },
-                "in-viewport": function (a) {
-                    return g.inviewport(a, {
-                        threshold: 0
-                    })
-                },
-                "above-the-fold": function (a) {
-                    return !g.belowthefold(a, {
-                        threshold: 0
-                    })
-                },
-                "right-of-fold": function (a) {
-                    return g.rightoffold(a, {
-                        threshold: 0
-                    })
-                },
-                "left-of-fold": function (a) {
-                    return !g.rightoffold(a, {
-                        threshold: 0
-                    })
                 }
             })
-    }(jQuery, window, document);
-!
-    function () {
-        var e = jQuery.event.special,
-            d = "D" + +new Date,
-            f = "D" + (+new Date + 1);
-        e.scrollstart = {
+        }
+
+        var c, b = this,
+            a = {
+                threshold: 0,
+                failure_limit: 0,
+                event: "scroll",
+                effect: "show",
+                container: f,
+                data_attribute: "original",
+                skip_invisible: !0,
+                appear: null,
+                load: null,
+                placeholder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+            };
+        return e && (i !== e.failurelimit && (e.failure_limit = e.failurelimit, delete e.failurelimit), i !== e.effectspeed && (e.effect_speed = e.effectspeed, delete e.effectspeed), g.extend(a, e)),
+            c = a.container === i || a.container === f ? h : g(a.container),
+        0 === a.event.indexOf("scroll") && c.bind(a.event,
+            function () {
+                return d()
+            }),
+            this.each(function () {
+                var k = this,
+                    l = g(k);
+                k.loaded = !1,
+                (l.attr("src") === i || l.attr("src") === !1) && l.attr("src", a.placeholder),
+                    l.one("appear",
+                        function () {
+                            if (!this.loaded) {
+                                if (a.appear) {
+                                    var m = b.length;
+                                    a.appear.call(k, m, a)
+                                }
+                                g("<img />").bind("load",
+                                    function () {
+                                        var q = l.data(a.data_attribute);
+                                        l.hide(),
+                                            l.is("img") ? l.attr("src", q) : l.css("background-image", "url('" + q + "')"),
+                                            l[a.effect](a.effect_speed),
+                                            k.loaded = !0;
+                                        var p = g.grep(b,
+                                            function (r) {
+                                                return !r.loaded
+                                            });
+                                        if (b = g(p), a.load) {
+                                            var o = b.length;
+                                            a.load.call(k, o, a)
+                                        }
+                                    }).attr("src", l.data(a.data_attribute))
+                            }
+                        }),
+                0 !== a.event.indexOf("scroll") && l.bind(a.event,
+                    function () {
+                        k.loaded || l.trigger("appear")
+                    })
+            }),
+            h.bind("resize",
+                function () {
+                    d()
+                }),
+        /iphone|ipod|ipad.*os 5/gi.test(navigator.appVersion) && h.bind("pageshow",
+            function (k) {
+                k.originalEvent && k.originalEvent.persisted && b.each(function () {
+                    g(this).trigger("appear")
+                })
+            }),
+            g(j).ready(function () {
+                d()
+            }),
+            this
+    },
+        g.belowthefold = function (d, b) {
+            var a;
+            return a = b.container === i || b.container === f ? (f.innerHeight ? f.innerHeight : h.height()) + h.scrollTop() : g(b.container).offset().top + g(b.container).height(),
+            a <= g(d).offset().top - b.threshold
+        },
+        g.rightoffold = function (d, b) {
+            var a;
+            return a = b.container === i || b.container === f ? h.width() + h.scrollLeft() : g(b.container).offset().left + g(b.container).width(),
+            a <= g(d).offset().left - b.threshold
+        },
+        g.abovethetop = function (d, b) {
+            var a;
+            return a = b.container === i || b.container === f ? h.scrollTop() : g(b.container).offset().top,
+            a >= g(d).offset().top + b.threshold + g(d).height()
+        },
+        g.leftofbegin = function (d, b) {
+            var a;
+            return a = b.container === i || b.container === f ? h.scrollLeft() : g(b.container).offset().left,
+            a >= g(d).offset().left + b.threshold + g(d).width()
+        },
+        g.inviewport = function (a, d) {
+            return !(g.rightoffold(a, d) || g.leftofbegin(a, d) || g.belowthefold(a, d) || g.abovethetop(a, d))
+        },
+        g.extend(g.expr[":"], {
+            "below-the-fold": function (a) {
+                return g.belowthefold(a, {
+                    threshold: 0
+                })
+            },
+            "above-the-top": function (a) {
+                return !g.belowthefold(a, {
+                    threshold: 0
+                })
+            },
+            "right-of-screen": function (a) {
+                return g.rightoffold(a, {
+                    threshold: 0
+                })
+            },
+            "left-of-screen": function (a) {
+                return !g.rightoffold(a, {
+                    threshold: 0
+                })
+            },
+            "in-viewport": function (a) {
+                return g.inviewport(a, {
+                    threshold: 0
+                })
+            },
+            "above-the-fold": function (a) {
+                return !g.belowthefold(a, {
+                    threshold: 0
+                })
+            },
+            "right-of-fold": function (a) {
+                return g.rightoffold(a, {
+                    threshold: 0
+                })
+            },
+            "left-of-fold": function (a) {
+                return !g.rightoffold(a, {
+                    threshold: 0
+                })
+            }
+        })
+}(jQuery, window, document);
+!function () {
+    var e = jQuery.event.special,
+        d = "D" + +new Date,
+        f = "D" + (+new Date + 1);
+    e.scrollstart = {
+        setup: function () {
+            var b, a = function (c) {
+                var h = this,
+                    g = arguments;
+                b ? clearTimeout(b) : (c.type = "scrollstart", jQuery.event.dispatch.apply(h, g)),
+                    b = setTimeout(function () {
+                            b = null
+                        },
+                        e.scrollstop.latency)
+            };
+            jQuery(this).bind("scroll", a).data(d, a)
+        },
+        teardown: function () {
+            jQuery(this).unbind("scroll", jQuery(this).data(d))
+        }
+    },
+        e.scrollstop = {
+            latency: 300,
             setup: function () {
-                var b, a = function (c) {
-                    var h = this,
-                        g = arguments;
-                    b ? clearTimeout(b) : (c.type = "scrollstart", jQuery.event.dispatch.apply(h, g)),
-                        b = setTimeout(function () {
-                                b = null
+                var a, c = function (h) {
+                    var g = this,
+                        b = arguments;
+                    a && clearTimeout(a),
+                        a = setTimeout(function () {
+                                a = null,
+                                    h.type = "scrollstop",
+                                    jQuery.event.dispatch.apply(g, b)
                             },
                             e.scrollstop.latency)
                 };
-                jQuery(this).bind("scroll", a).data(d, a)
+                jQuery(this).bind("scroll", c).data(f, c)
             },
             teardown: function () {
-                jQuery(this).unbind("scroll", jQuery(this).data(d))
+                jQuery(this).unbind("scroll", jQuery(this).data(f))
             }
-        },
-            e.scrollstop = {
-                latency: 300,
-                setup: function () {
-                    var a, c = function (h) {
-                        var g = this,
-                            b = arguments;
-                        a && clearTimeout(a),
-                            a = setTimeout(function () {
-                                    a = null,
-                                        h.type = "scrollstop",
-                                        jQuery.event.dispatch.apply(g, b)
-                                },
-                                e.scrollstop.latency)
-                    };
-                    jQuery(this).bind("scroll", c).data(f, c)
-                },
-                teardown: function () {
-                    jQuery(this).unbind("scroll", jQuery(this).data(f))
-                }
-            }
-    }();
+        }
+}();
 +(function (a) {
     a(document).ready(function () {
         a(".toggle-search").click(function () {
@@ -1397,6 +1390,7 @@ eval(function (h, b, i, d, g, f) {
             if (o) {
                 a("#comment").after('<input type="text" name="edit_id" id="edit_id" value="' + o + '" style="display:none;" />')
             }
+            /*
             a.ajax({
                 url: "/comment/add/",
                 data: a(this).serialize(),
@@ -1462,6 +1456,76 @@ eval(function (h, b, i, d, g, f) {
                             scrollTop: a("#new_comm_" + k).offset().top - 200
                         },
                         500);
+                    a(".comt-avatar .avatar").attr("src", a(".commentnew .avatar:last").attr("src"));
+                    l();
+                    k++;
+                    o = "";
+                    a("*").remove("#edit_id");
+                    A.style.display = "none";
+                    A.onclick = null;
+                    y.I("comment_parent").value = "0";
+                    if (w && C) {
+                        w.parentNode.insertBefore(C, w);
+                        w.parentNode.removeChild(w)
+                    }
+                }
+            });
+            */
+            a.ajax({
+                url: "/comment/add/",
+                data: a(this).serialize(),
+                type: a(this).attr("method"),
+                // headers:{"HTTP_X_REQUESTED_WITH":"XMLHttpRequest"}, 修改请求头
+                error: function (w) {
+                    a(".comt-loading").hide();
+                    a(".comt-error").show().html(w.responseText);
+                    setTimeout(function () {
+                        $submit.attr("disabled", false).fadeTo("slow", 1);
+                        a(".comt-error").fadeOut()
+                    }, 3000)
+                },
+                success: function (B) {
+                    a(".comt-loading").hide();
+                    r.push(a("#comment").val());
+                    a("textarea").each(function () {
+                        this.value = ""
+                    });
+
+                    //在这里添加如下代码
+                    //获取seeion信息，判断用户是否登录
+                    var user_id = "<%=session.getAttribute('uid','')%>";
+                    var nick = $('#author').val();
+                    if (user_id != '') {     //如果用户处于登录状态，展示用户ID
+                        $('#nick').html(nick);
+                    } else {                 //如果没有登录，证明是游民，游民可以换马甲
+                        $('#nick').html(nick + '&nbsp; <a class="switch-author" href="javascript:;" data-type="switch-author" style="font-size:12px;">换个身份</a>');
+                    }
+
+                    var y = addComment, A = y.I("cancel-comment-reply-link"), w = y.I("wp-temp-form-div"),
+                        C = y.I(y.respondId), x = y.I("comment_post_ID").value, z = y.I("comment_parent").value;
+                    if (!o && $comments.length) {
+                        n = parseInt($comments.text().match(/\d+/));
+                        $comments.text($comments.text().replace(n, n + 1))
+                    }
+                    new_htm = '" id="new_comm_' + k + '"></';
+                    new_htm = (z == "0") ? ('\n<ol style="clear:both;' + '" class="commentlist commentnew' + new_htm + "ol>") : ('\n<ul class="children' + new_htm + "ul>");
+                    ok_htm = '\n<span id="success_' + k + b;
+                    ok_htm += "</span><span></span>\n";
+                    if (z == "0") {
+                        if (a("#postcomments .commentlist").length) {
+                            a("#postcomments .commentlist").before(new_htm)
+                        } else {
+                            a("#respond").after(new_htm)
+                        }
+                    } else {
+                        a("#respond").after(new_htm)
+                    }
+                    a("#comment-author-info").slideUp();
+                    console.log(a("#new_comm_" + k));
+                    a("#new_comm_" + k).hide().append(B);
+                    a("#new_comm_" + k + " li").append(ok_htm);
+                    a("#new_comm_" + k).fadeIn(4000);
+                    $body.animate({scrollTop: a("#new_comm_" + k).offset().top - 200}, 500);
                     a(".comt-avatar .avatar").attr("src", a(".commentnew .avatar:last").attr("src"));
                     l();
                     k++;

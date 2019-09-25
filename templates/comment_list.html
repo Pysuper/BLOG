@@ -1,33 +1,33 @@
 {% load staticfiles %}
 {% load comment_tags oauth_tags %}
+
 <div id="respond" class="no_webshot">
     <form action="/comment/add/" method="post" id="commentform">
         <div class="comt-title">
             {% if request.session.username|default:'' != '' %}
-            {% get_user_data request.session.uid as user %}
-            <div class="comt-avatar pull-left">
-                <img alt='' src='/media/{{ user.avatar }}' class='avatar avatar-54 photo avatar-default' height='54' width='54' />
-            </div>
-            <div class="comt-author pull-left" id="nick">
-                {{ request.session.username }}
-            </div>
+                {% get_user_data request.session.uid as user %}
+                <div class="comt-avatar pull-left">
+                    <img alt='' src='/media/{{ user.avatar }}' class='avatar avatar-54 photo avatar-default' height='54'
+                         width='54'/>
+                </div>
+                <div class="comt-author pull-left" id="nick">{{ request.session.username }}</div>
             {% endif %}
 
-            {% if request.session.nick|default:'' != '' %}经点过赞啦
-            {% get_tourist_data request.session.tid as tourist %}
-            <div class="comt-avatar pull-left">
-                <img alt='' src='/media/avatar' class='avatar avatar-54 photo avatar-default' height='54' width='54' />
-            </div>
-            <div class="comt-author pull-left" id="nick">
-                {{ tourist.nickname }}
-                &nbsp; <a class="switch-author" href="javascript:;" data-type="switch-author"
-                    style="font-size:12px;">换个身份</a>
-            </div>
+            {% if request.session.nick|default:'' != '' %}已经点过赞啦！
+                {% get_tourist_data request.session.tid as tourist %}
+                <div class="comt-avatar pull-left">
+                    <img alt='' src='/media/avatar' class='avatar avatar-54 photo avatar-default' height='54'
+                         width='54'/>
+                </div>
+                <div class="comt-author pull-left" id="nick">
+                    {{ tourist.nickname }}
+                    &nbsp; <a class="switch-author" href="javascript:;" data-type="switch-author"
+                              style="font-size:12px;">换个身份</a>
+                </div>
             {% else %}
+                <div class="comt-author pull-left" id="nick">
 
-            <div class="comt-author pull-left" id="nick">
-
-            </div>
+                </div>
             {% endif %}
 
             <a id="cancel-comment-reply-link" class="pull-right" href="javascript:;">取消评论</a>
@@ -37,22 +37,33 @@
             <div class="comt-box">
                 <h3>发表我的评论</h3>
                 <textarea placeholder="写点什么..." class="input-block-level comt-area" name="w" id="comment" cols="100%"
-                    rows="3" tabindex="1"
-                    onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                          rows="3" tabindex="1"
+                          onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
                 <textarea name="comment" cols="100%" rows="4" style="display:none"></textarea>
+                <div class="card mt-2 rounded-0 border-0" id="comment-block">
+                    <div class="card border-0 rounded-0 f-16" id="editor-block">
+                        <div class="card-body text-center m-2 m-md-3 f-16" id="no-editor">
+                            <div>您尚未登录，请
+                                <a class="text-danger" href="/accounts/login/?next=/article/2037/">登录</a> 或
+                                <a class="text-danger" href="/accounts/register/?next=/article/2037/">注册</a> 后评论
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="comt-ctrl">
                     <button class="btn btn-primary pull-right" type="submit" name="submit" id="submit" tabindex="5">
                         <i class="fa fa-check-square-o"></i> 提交评论
                     </button>
                     <div class="comt-tips pull-right">
-                        <input type='hidden' name='comment_post_ID' value='{{ category }}' id='comment_post_ID' />
-                        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                        <input type='hidden' name='comment_post_ID' value='{{ category }}' id='comment_post_ID'/>
+                        <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
                         <p style="display: none;">
                             <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce"
-                                value="da9dc5c77a" />
+                                   value="da9dc5c77a"/>
                         </p>
                         <p style="display: none;">
-                            <input type="hidden" id="ak_js" name="ak_js" value="50" />
+                            <input type="hidden" id="ak_js" name="ak_js" value="50"/>
                         </p>
                     </div>
                     <span data-type="comment-insert-smilie" class="muted comt-smilie">
@@ -61,8 +72,36 @@
                     <span class="muted comt-mailme">
                         <label for="comment_mail_notify" class="checkbox inline" style="padding-top:0">
                             <input type="checkbox" name="comment_mail_notify" id="comment_mail_notify"
-                                value="comment_mail_notify" checked="checked" />有人回复时邮件通知我</label>
+                                   value="comment_mail_notify" checked="checked"/>有人回复时邮件通知我
+                        </label>
                     </span>
+                    <div id="comment-smilies" class="hide" style="display: block;">
+                        <img data-simle="mrgreen" data-type="comment-smilie" src="/static/comment/icon_mrgreen.gif">
+                        <img data-simle="razz" data-type="comment-smilie" src="/static/comment/icon_razz.gif">
+                        <img data-simle="sad" data-type="comment-smilie" src="/static/comment/icon_sad.gif">
+                        <img data-simle="smile" data-type="comment-smilie" src="/static/comment/icon_smile.gif">
+                        <img data-simle="oops" data-type="comment-smilie" src="/static/comment/icon_redface.gif">
+                        <img data-simle="grin" data-type="comment-smilie" src="/static/comment/icon_biggrin.gif">
+                        <img data-simle="eek" data-type="comment-smilie" src="/static/comment/img/icon_surprised.gif">
+                        <img data-simle="???"
+                                                                              data-type="comment-smilie"
+                                                                              src="/static/comment/img/icon_confused.gif"><img
+                            data-simle="cool" data-type="comment-smilie" src="/static/comment/img/icon_cool.gif"><img
+                            data-simle="lol" data-type="comment-smilie" src="/static/comment/img/icon_lol.gif"><img
+                            data-simle="mad" data-type="comment-smilie" src="/static/comment/img/icon_mad.gif"><img
+                            data-simle="twisted" data-type="comment-smilie"
+                            src="/static/comment/img/icon_twisted.gif"><img data-simle="roll" data-type="comment-smilie"
+                                                                            src="/static/comment/img/icon_rolleyes.gif"><img
+                            data-simle="wink" data-type="comment-smilie" src="/static/comment/img/icon_wink.gif"><img
+                            data-simle="idea" data-type="comment-smilie" src="/static/comment/img/icon_idea.gif"><img
+                            data-simle="arrow" data-type="comment-smilie" src="/static/comment/img/icon_arrow.gif"><img
+                            data-simle="neutral" data-type="comment-smilie"
+                            src="/static/comment/img/icon_neutral.gif"><img data-simle="cry" data-type="comment-smilie"
+                                                                            src="/static/comment/img/icon_cry.gif"><img
+                            data-simle="?" data-type="comment-smilie" src="/static/comment/img/icon_question.gif"><img
+                            data-simle="evil" data-type="comment-smilie" src="/static/comment/img/icon_evil.gif"><img
+                            data-simle="shock" data-type="comment-smilie" src="/static/comment/img/icon_eek.gif"><img
+                            data-simle="!" data-type="comment-smilie" src="/static/comment/img/icon_exclaim.gif"></div>
                 </div>
             </div>
 
@@ -71,46 +110,46 @@
                 <ul>
                     <li class="form-inline">
                         <label class="hide" for="author">昵称</label>
-                        <input class="ipt" type="text" name="author" id="author"
-                            value="{% if user %}{{ user.username }}{% elif tourist %}{{ tourist.nickname }}{% endif %}"
-                            tabindex="2" placeholder="昵称">
+                        <input class="ipt" type="text" name="author" id="author" value="
+                                {% if user %}{{ user.username }}{% elif tourist %}{{ tourist.nickname }}{% endif %}"
+                               tabindex="2" placeholder="昵称">
                         <span class="help-inline">昵称 (必填)</span>
                     </li>
                     <li class="form-inline">
-                        <label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email"
-                            value="{% if user %}{{ user.email }}{% elif tourist %}{{ tourist.email }}{% endif %}"
-                            tabindex="3" placeholder="邮箱">
+                        <label class="hide" for="email">邮箱</label>
+                        <input class="ipt" type="text" name="email" id="email"
+                               value=" {% if user %}{{ user.email }}{% elif tourist %}{{ tourist.email }}{% endif %}"
+                               tabindex="3" placeholder="邮箱">
                         <span class="help-inline">邮箱 (必填)</span>
                     </li>
-                    <li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text"
-                            name="url" id="url"
-                            value="{% if user %}{{ user.link }}{% elif tourist %}{{ tourist.address }}{% endif %}"
-                            tabindex="4" placeholder="网址">
+                    <li class="form-inline"><label class="hide" for="url">网址</label>
+                        <input class="ipt" type="text" name="url" id="url"
+                               value=" {% if user %}{{ user.link }}{% elif tourist %}{{ tourist.address }}{% endif %}"
+                               tabindex="4" placeholder="网址">
                         <span class="help-inline">网址</span>
                     </li>
                 </ul>
             </div>
         </div>
 
-
     </form>
 </div>
 
 <div id="postcomments">
 
-    {% if category == 'message'%}
-
-    {% get_comment_user_count category as  user_num%}
-    {% build_comment_tree category request.path as htm %}
+    {% if category == 'message' %}
+        {% get_comment_user_count category as  user_num %}
+        {% build_comment_tree category request.path as htm %}
     {% elif category == 'about' %}
-    {% get_comment_user_count category as  user_num%}
-    {% build_comment_tree category request.path as htm %}
+        {% get_comment_user_count category as  user_num %}
+        {% build_comment_tree category request.path as htm %}
     {% else %}
-    {% get_comment_user_count category category as  user_num%}
-    {% build_comment_tree category  request.path category as htm %}
+        {% get_comment_user_count category category as  user_num %}
+        {% build_comment_tree category request.path category as htm %}
     {% endif %}
     <div id="comments">
-        <i class="fa fa-comments-o"></i> <b> ({{ user_num }})</b>个小伙伴在吐槽
+        <i class="fa fa-comments-o"></i>
+        <b> ({{ user_num }})</b>个小伙伴在吐槽
     </div>
     {{ htm }}
     <div class="commentnav">
