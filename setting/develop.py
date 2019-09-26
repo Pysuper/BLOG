@@ -101,31 +101,34 @@ USE_L10N = True
 
 USE_TZ = False
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-
 # 媒体文件收集 ==> 富文本编辑器的文件上传路径
-MEDIA_URL = "/media/"  # 媒体文件别名(相对路径) 和 绝对路径
-MEDIA_ROOT = (
-    os.path.join(BASE_DIR, 'media')
-)
-CKEDITOR_UPLOAD_PATH = "article_images" # 富文本编辑器图片上传的保存路径
+# MEDIA_URL = "/media/"  # 媒体文件别名(相对路径) 和 绝对路径
+# MEDIA_ROOT = (
+#     os.path.join(BASE_DIR, 'media')
+# )
+CKEDITOR_UPLOAD_PATH = "article_images"  # 富文本编辑器图片上传的保存路径
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
 
 # 配置七牛云存储
-# QINIU_ACCESS_KEY = '_TqLcRIfwJi2-2w8CZFLiEtWJHulhLKrX1UZQv0H'   # AccessKey
-# QINIU_SECRET_KEY = 'tTNJ-RdRAcJpdhNL5HtDb2J9OBBIPkj4MFV5R405'   # SecretKey
-# QINIU_BUCKET_NAME = 'wj5633'    # 七牛云上的空间名
-# QINIU_BUCKET_DOMAIN = 'ompehspge.bkt.clouddn.com/'  # 空间域名
-# QINIU_SECURE_URL = False  # 使用http
-#
+QINIU_ACCESS_KEY = '_TqLcRIfwJi2-2w8CZFLiEtWJHulhLKrX1UZQv0H'  # AccessKey
+QINIU_SECRET_KEY = 'tTNJ-RdRAcJpdhNL5HtDb2J9OBBIPkj4MFV5R405'  # SecretKey
+QINIU_BUCKET_NAME = 'smallspider'  # 七牛云上的空间名
+QINIU_BUCKET_DOMAIN = 'pyfev046q.bkt.clouddn.com/'  # 空间域名
+QINIU_SECURE_URL = False  # 使用http
 # PREFIX_URL = 'http://'
-#
-# MEDIA_URL = PREFIX_URL + QINIU_BUCKET_DOMAIN + '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#
-# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+MEDIA_URL =   QINIU_BUCKET_DOMAIN + '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+
+STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # 统一分页设置
 BASE_PAGE_BY = 4
@@ -168,13 +171,13 @@ CKEDITOR_CONFIGS = {
 }
 
 # 修改默认存储引擎为自定义的
-DEFAULT_FILE_STORAGE = 'blog.storage.WatermarkStoarge'
+# DEFAULT_FILE_STORAGE = 'blog.storage.WatermarkStoarge'
 
 # 配置ckeditor的js路径
 CKEDITOR_JQUERY_URL = 'https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'
 
 # 将CKEditor需要的媒体资源拷入STATIC_ROOT指定的路径中
-STATIC_ROOT = os.path.join(BASE_DIR, 'whoosh_index')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'whoosh_index')
 
 # 添加日志
 LOGGING = {

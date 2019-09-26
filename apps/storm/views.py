@@ -1,11 +1,15 @@
 import markdown
 import time
+
+from django.http import JsonResponse
 from django.views import generic
 from django.conf import settings
 from django.utils.text import slugify
 from django.shortcuts import render, HttpResponse, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404, get_list_or_404
+from qiniu import Auth
+
 from .models import Article, BigCategory, Category, Tag
 from markdown.extensions.toc import TocExtension  # 锚点的拓展
 from haystack.generic_views import SearchView  # 导入搜索视图
@@ -335,3 +339,19 @@ class MySearchView(SearchView):
 
 def page_not_found(request):
     return render_to_response('404.html')
+
+
+# 获取七牛云授权 token
+def qiniu_token(request):
+    # 七牛云授权秘钥（在七牛云中可以得到）
+    access_key = settings.QINIU_ACCESS_KEY
+    secret_key = settings.QINIU_SECRET_KEY
+    # 存储对象名称（在七牛云中可以得到）
+    bucket_name = settings.QINIU_BUCKET_NAME
+    # 获得七牛云授权对象 q
+    q = Auth(access_key,secret_key)
+    # 获得一个授权的token
+    token = q.upload_token(bucket_name)
+    # 将七牛云的授权 token 返回给前端
+    # return restful.result(data={‘token‘:token})# 这个是我在项目中集成的通用返回方法
+    return JsonResponse({"data":{"token":"token"}})
