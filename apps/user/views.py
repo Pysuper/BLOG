@@ -26,10 +26,10 @@ def register_view(request):
             context = {'username': username, 'pwd': password, 'email': email}
             if password.isdigit():
                 context['pwd_error'] = 'nums'
-                return render(request, 'account/sign_up.html', context)
+                return render(request, 'account/signup.html', context)
             if password != password2:
                 context['pwd_error'] = 'unequal'
-                return render(request, 'account/sign_up.html', context)
+                return render(request, 'account/signup.html', context)
 
             # 判断用户是否存在
             user = Ouser.objects.filter(username=username)

@@ -228,7 +228,7 @@ class DetailView(generic.DetailView):
             TocExtension(slugify=slugify),
         ],
             safe_mode=True,
-          enable_attributes=False,)
+            enable_attributes=False, )
         obj.body = md.convert(obj.body)
         obj.toc = md.toc
         return obj

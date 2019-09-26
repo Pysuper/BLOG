@@ -6352,7 +6352,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 
 .article-content pre {
 	text-indent: 0;
-	/*background-color: #0c0c0c;*/
+	background-color: #363636;
 	border: 1px solid #eee;
 	overflow: hidden;
 	padding: 8px;

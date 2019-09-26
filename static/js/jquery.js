@@ -1253,8 +1253,8 @@ eval(function (h, b, i, d, g, f) {
             } else {
                 a(this).addClass("actived");
                 var z = a(this).data("id"),
-                    y = a(this).data("action"),
-                    x = a(this).children(".count");
+                y = a(this).data("action"),
+                x = a(this).children(".count");
 
                 var w = {
                     action: "bigfa_like",
@@ -1262,14 +1262,13 @@ eval(function (h, b, i, d, g, f) {
                     um_action: y
                 };
                 a.post("/love/", w,
-                    function (A) {
-                        a(x).html(A)
-                    });
+                function(A) {
+                    a(x).html(A)
+                });
                 a.tipsBox({
                     obj: a(this),
                     str: "+1",
-                    callback: function () {
-                    }
+                    callback: function() {}
                 });
                 return false
             }
@@ -1317,11 +1316,12 @@ eval(function (h, b, i, d, g, f) {
                             }
                             a("#comment-smilies").html(x)
                         }
-                        a("#comment-smilies").slideToggle(100);
+                        console.log("11");
+                        a("#comment-smilies").slideToggle(200);
                         break;
                     case "comment-smilie":
                         u(A.attr("data-simle"));
-                        A.parent().slideUp(300);
+                        A.parent().slideUp(10000);
                         break;
                     case "switch-author":
                         a(".comt-comterinfo").slideToggle(300);

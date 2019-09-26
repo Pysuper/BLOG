@@ -40,7 +40,7 @@
                           rows="3" tabindex="1"
                           onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
                 <textarea name="comment" cols="100%" rows="4" style="display:none"></textarea>
-                <div class="card mt-2 rounded-0 border-0" id="comment-block">
+                <!--<div class="card mt-2 rounded-0 border-0" id="comment-block">
                     <div class="card border-0 rounded-0 f-16" id="editor-block">
                         <div class="card-body text-center m-2 m-md-3 f-16" id="no-editor">
                             <div>您尚未登录，请
@@ -50,7 +50,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div>-->
                 <div class="comt-ctrl">
                     <button class="btn btn-primary pull-right" type="submit" name="submit" id="submit" tabindex="5">
                         <i class="fa fa-check-square-o"></i> 提交评论
@@ -66,42 +66,37 @@
                             <input type="hidden" id="ak_js" name="ak_js" value="50"/>
                         </p>
                     </div>
-                    <span data-type="comment-insert-smilie" class="muted comt-smilie">
-                        <i class="fa fa-smile-o"></i> 表情
-                    </span>
+                    <span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="fa fa-smile-o"></i> 表情</span>
                     <span class="muted comt-mailme">
                         <label for="comment_mail_notify" class="checkbox inline" style="padding-top:0">
                             <input type="checkbox" name="comment_mail_notify" id="comment_mail_notify"
                                    value="comment_mail_notify" checked="checked"/>有人回复时邮件通知我
                         </label>
                     </span>
-                    <div id="comment-smilies" class="hide" style="display: block;">
+                    <div id="comment-smilies" class="hide" style="display: none;float: none">
                         <img data-simle="mrgreen" data-type="comment-smilie" src="/static/comment/icon_mrgreen.gif">
                         <img data-simle="razz" data-type="comment-smilie" src="/static/comment/icon_razz.gif">
                         <img data-simle="sad" data-type="comment-smilie" src="/static/comment/icon_sad.gif">
                         <img data-simle="smile" data-type="comment-smilie" src="/static/comment/icon_smile.gif">
                         <img data-simle="oops" data-type="comment-smilie" src="/static/comment/icon_redface.gif">
                         <img data-simle="grin" data-type="comment-smilie" src="/static/comment/icon_biggrin.gif">
-                        <img data-simle="eek" data-type="comment-smilie" src="/static/comment/img/icon_surprised.gif">
-                        <img data-simle="???"
-                                                                              data-type="comment-smilie"
-                                                                              src="/static/comment/img/icon_confused.gif"><img
-                            data-simle="cool" data-type="comment-smilie" src="/static/comment/img/icon_cool.gif"><img
-                            data-simle="lol" data-type="comment-smilie" src="/static/comment/img/icon_lol.gif"><img
-                            data-simle="mad" data-type="comment-smilie" src="/static/comment/img/icon_mad.gif"><img
-                            data-simle="twisted" data-type="comment-smilie"
-                            src="/static/comment/img/icon_twisted.gif"><img data-simle="roll" data-type="comment-smilie"
-                                                                            src="/static/comment/img/icon_rolleyes.gif"><img
-                            data-simle="wink" data-type="comment-smilie" src="/static/comment/img/icon_wink.gif"><img
-                            data-simle="idea" data-type="comment-smilie" src="/static/comment/img/icon_idea.gif"><img
-                            data-simle="arrow" data-type="comment-smilie" src="/static/comment/img/icon_arrow.gif"><img
-                            data-simle="neutral" data-type="comment-smilie"
-                            src="/static/comment/img/icon_neutral.gif"><img data-simle="cry" data-type="comment-smilie"
-                                                                            src="/static/comment/img/icon_cry.gif"><img
-                            data-simle="?" data-type="comment-smilie" src="/static/comment/img/icon_question.gif"><img
-                            data-simle="evil" data-type="comment-smilie" src="/static/comment/img/icon_evil.gif"><img
-                            data-simle="shock" data-type="comment-smilie" src="/static/comment/img/icon_eek.gif"><img
-                            data-simle="!" data-type="comment-smilie" src="/static/comment/img/icon_exclaim.gif"></div>
+                        <img data-simle="eek" data-type="comment-smilie" src="/static/comment/icon_surprised.gif">
+                        <img data-simle="???" data-type="comment-smilie" src="/static/comment/icon_confused.gif">
+                        <img data-simle="cool" data-type="comment-smilie" src="/static/comment/icon_cool.gif">
+                        <img data-simle="lol" data-type="comment-smilie" src="/static/comment/icon_lol.gif">
+                        <img data-simle="mad" data-type="comment-smilie" src="/static/comment/icon_mad.gif">
+                        <img data-simle="twisted" data-type="comment-smilie" src="/static/comment/icon_twisted.gif">
+                        <img data-simle="roll" data-type="comment-smilie" src="/static/comment/icon_rolleyes.gif">
+                        <img data-simle="wink" data-type="comment-smilie" src="/static/comment/icon_wink.gif">
+                        <img data-simle="idea" data-type="comment-smilie" src="/static/comment/icon_idea.gif">
+                        <img data-simle="arrow" data-type="comment-smilie" src="/static/comment/icon_arrow.gif">
+                        <img data-simle="neutral" data-type="comment-smilie" src="/static/comment/icon_neutral.gif">
+                        <img data-simle="cry" data-type="comment-smilie" src="/static/comment/icon_cry.gif">
+                        <img data-simle="?" data-type="comment-smilie" src="/static/comment/icon_question.gif">
+                        <img data-simle="evil" data-type="comment-smilie" src="/static/comment/icon_evil.gif">
+                        <img data-simle="shock" data-type="comment-smilie" src="/static/comment/icon_eek.gif">
+                        <img data-simle="!" data-type="comment-smilie" src="/static/comment/icon_exclaim.gif">
+                    </div>
                 </div>
             </div>
 
