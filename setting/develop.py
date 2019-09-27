@@ -52,6 +52,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'storm.context_processors.settings_info',  # 自定义上下文管理器
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -116,18 +117,17 @@ CKEDITOR_UPLOAD_PATH = "article_images"  # 富文本编辑器图片上传的保�
 # 配置七牛云存储
 QINIU_ACCESS_KEY = '_TqLcRIfwJi2-2w8CZFLiEtWJHulhLKrX1UZQv0H'  # AccessKey
 QINIU_SECRET_KEY = 'tTNJ-RdRAcJpdhNL5HtDb2J9OBBIPkj4MFV5R405'  # SecretKey
-QINIU_BUCKET_NAME = 'smallspider'  # 七牛云上的空间名
-QINIU_BUCKET_DOMAIN = 'pyfev046q.bkt.clouddn.com/'  # 空间域名
+QINIU_BUCKET_NAME = 'blog-qiniuyun'  # 七牛云上的空间名
+QINIU_BUCKET_DOMAIN = 'pyh05v5q8.bkt.clouddn.com'  # 空间域名
 QINIU_SECURE_URL = False  # 使用http
-# PREFIX_URL = 'http://'
-MEDIA_URL =   QINIU_BUCKET_DOMAIN + '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+PREFIX_URL = 'http://'
+MEDIA_URL = QINIU_BUCKET_DOMAIN + '/media/'
+MEDIA_ROOT = 'media'
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-
+# 配置静态文件上传七牛云
 STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # 统一分页设置

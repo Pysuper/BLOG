@@ -1,4 +1,5 @@
 ﻿{% extends 'base.html' %}
+{% load staticfiles %}
 {% load blog_tags %}
 
 {% block title %}
@@ -17,7 +18,7 @@
     <div class="pagewrapper clearfix">
         <header class="pageheader clearfix">
             <h1 class="pull-left">
-                <a href="https://cuiqingcai.com/about">关于自己</a>
+                <a href="/about/">关于自己</a>
             </h1>
             <div class="pull-right">
                 <!-- 百度分享 -->
@@ -44,7 +45,7 @@
             <div style="text-indent:0px;text-align:center">
                 <!-- personal -->
                 <h2 style="text-align: center;">个人简介</h2>
-                <p><img src="/static/images/picture.ico" style="border-radius:50%;width:100px;"/></p>
+                <p><img src="{% static "images/picture.ico" %}" style="border-radius:50%;width:100px;"/></p>
                 <p style="text-align: center;font-size:16px">SmallSpider</p>
                 <p id="brief" style="text-align: center;">穿格子衫的文艺青年</p>
                 <p style="text-align: center;">

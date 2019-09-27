@@ -6049,7 +6049,7 @@ a.badge-inverse:hover .label-arrow,a.label-inverse:hover .label-arrow {
 }
 
 #comment-smilies {
-	background-color: #eee;
+	/*background-color: #eee;*/
 	padding: 3px 5px;
 	float: left;
 	position: relative;

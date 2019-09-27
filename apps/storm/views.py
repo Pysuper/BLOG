@@ -349,9 +349,9 @@ def qiniu_token(request):
     # 存储对象名称（在七牛云中可以得到）
     bucket_name = settings.QINIU_BUCKET_NAME
     # 获得七牛云授权对象 q
-    q = Auth(access_key,secret_key)
+    q = Auth(access_key, secret_key)
     # 获得一个授权的token
     token = q.upload_token(bucket_name)
     # 将七牛云的授权 token 返回给前端
     # return restful.result(data={‘token‘:token})# 这个是我在项目中集成的通用返回方法
-    return JsonResponse({"data":{"token":"token"}})
+    return JsonResponse({"data": {"token": token}})
