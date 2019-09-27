@@ -22,8 +22,8 @@ INSTALLED_APPS = [
     'comment',  # 评论
     'xadmin',  # xadmin
     'crispy_forms',
-    'ckeditor',  # 配置富文本编辑器
-    'ckeditor_uploader',  # 配置上传图片
+    'ckeditor', # 配置富文本编辑器
+    'ckeditor_uploader',    # 配置上传图片
     'haystack',  # 全文搜索应用 这个要放在其他应用之前
     'rest_framework',  # API
 ]
@@ -52,7 +52,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'storm.context_processors.settings_info',  # 自定义上下文管理器
-                'django.template.context_processors.media',
             ],
         },
     },
@@ -102,33 +101,17 @@ USE_L10N = True
 
 USE_TZ = False
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
 # 媒体文件收集 ==> 富文本编辑器的文件上传路径
-# MEDIA_URL = "/media/"  # 媒体文件别名(相对路径) 和 绝对路径
-# MEDIA_ROOT = (
-#     os.path.join(BASE_DIR, 'media')
-# )
-CKEDITOR_UPLOAD_PATH = "article_images"  # 富文本编辑器图片上传的保存路径
-
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-
-# 配置七牛云存储
-QINIU_ACCESS_KEY = '_TqLcRIfwJi2-2w8CZFLiEtWJHulhLKrX1UZQv0H'  # AccessKey
-QINIU_SECRET_KEY = 'tTNJ-RdRAcJpdhNL5HtDb2J9OBBIPkj4MFV5R405'  # SecretKey
-QINIU_BUCKET_NAME = 'blog-qiniuyun'  # 七牛云上的空间名
-QINIU_BUCKET_DOMAIN = 'pyh05v5q8.bkt.clouddn.com'  # 空间域名
-QINIU_SECURE_URL = False  # 使用http
-PREFIX_URL = 'http://'
-MEDIA_URL = QINIU_BUCKET_DOMAIN + '/media/'
-MEDIA_ROOT = 'media'
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-
-# 配置静态文件上传七牛云
-STATIC_URL = QINIU_BUCKET_DOMAIN + '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+MEDIA_URL = "/media/"  # 媒体文件别名(相对路径) 和 绝对路径
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, 'media')
+)
+CKEDITOR_UPLOAD_PATH = "article_images" # 富文本编辑器图片上传的保存路径
 
 # 统一分页设置
 BASE_PAGE_BY = 4
@@ -171,52 +154,52 @@ CKEDITOR_CONFIGS = {
 }
 
 # 修改默认存储引擎为自定义的
-# DEFAULT_FILE_STORAGE = 'blog.storage.WatermarkStoarge'
+DEFAULT_FILE_STORAGE = 'blog.storage.WatermarkStoarge'
 
 # 配置ckeditor的js路径
-CKEDITOR_JQUERY_URL = 'https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'
+CKEDITOR_JQUERY_URL ='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'
 
 # 将CKEditor需要的媒体资源拷入STATIC_ROOT指定的路径中
-# STATIC_ROOT = os.path.join(BASE_DIR, 'whoosh_index')
+STATIC_ROOT = os.path.join(BASE_DIR,'whoosh_index')
 
 # 添加日志
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
-    'formatters': {  # 日志信息显示的格式
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(lineno)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
-        },
-    },
-    'filters': {  # 对日志进行过滤
-        'require_debug_true': {  # django在debug模式下才输出日志
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    'handlers': {  # 日志处理方法
-        'console': {  # 向终端中输出日志
-            'level': 'INFO',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'file': {  # 向文件中输出日志
-            'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, "log/blog.log"),  # 日志文件的位置
-            'maxBytes': 300 * 1024 * 1024,
-            'backupCount': 10,
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {  # 日志器
-        'django': {  # 定义了一个名为django的日志器
-            'handlers': ['console', 'file'],  # 可以同时向终端与文件中输出日志
-            'propagate': True,  # 是否继续传递日志信息
-            'level': 'INFO',  # 日志器接收的最低日志级别
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
+#     'formatters': {  # 日志信息显示的格式
+#         'verbose': {
+#             'format': '%(levelname)s %(asctime)s %(module)s %(lineno)d %(message)s'
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
+#         },
+#     },
+#     'filters': {  # 对日志进行过滤
+#         'require_debug_true': {  # django在debug模式下才输出日志
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         },
+#     },
+#     'handlers': {  # 日志处理方法
+#         'console': {  # 向终端中输出日志
+#             'level': 'INFO',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'simple'
+#         },
+#         'file': {  # 向文件中输出日志
+#             'level': 'INFO',
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'filename': os.path.join(BASE_DIR, "log/blog.log"),  # 日志文件的位置
+#             'maxBytes': 300 * 1024 * 1024,
+#             'backupCount': 10,
+#             'formatter': 'verbose'
+#         },
+#     },
+#     'loggers': {  # 日志器
+#         'django': {  # 定义了一个名为django的日志器
+#             'handlers': ['console', 'file'],  # 可以同时向终端与文件中输出日志
+#             'propagate': True,  # 是否继续传递日志信息
+#             'level': 'INFO',  # 日志器接收的最低日志级别
+#         },
+#     }
+# }

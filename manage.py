@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "setting.develop")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "setting.develop")  # 开发
+    # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "setting.on-line")    # 线上
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

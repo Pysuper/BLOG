@@ -1,4 +1,6 @@
 import re
+from pprint import pprint
+
 from storm.models import Article
 from django.conf import settings
 from django.http import HttpResponse
@@ -28,20 +30,19 @@ def confirm(new_content, comment_post_ID, auser):
 @csrf_exempt
 @require_POST
 def AddcommentView(request):
-    print('---评论---')
-    print(request.is_ajax(), request.method)
     if request.is_ajax():
         data = request.POST
+        pprint(data)
         # 评论内容哦你
         new_content = data.get('w')
         # 评论对象，指的是页面留言、文章、等
         comment_post_ID = data.get('comment_post_ID')
         # 评论者
-        author = data.get('author', '')
+        author = data.get('author', '').replace(' ', '')
         # 评论者邮箱
-        email = data.get('email', '')
+        email = data.get('email', '').replace(' ', '')
         # 评论者网址
-        url = data.get('url', '')
+        url = data.get('url', '').replace(' ', '')
 
         """
         验证信息格式

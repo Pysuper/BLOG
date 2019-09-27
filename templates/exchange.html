@@ -1,4 +1,5 @@
 ﻿{% extends 'base.html' %}
+{% load staticfiles %}
 {% load blog_tags %}
 {% block title %}TAO丨技术交流{% endblock title %}
 
@@ -46,7 +47,7 @@
                             <div class="p-sm" style="overflow: hidden; padding-bottom: 15px;">
                                 <p class="text-center">我的个人微信公众号，欢迎关注</p>
                                 <p class="text-center">扫码或搜索：进击的Coder</p>
-                                <div class="text-center"><img class="code-img" src="/static/images/1.jpg"/></div>
+                                <div class="text-center"><img class="code-img" src="{% static 'images/1.jpg' %}"/></div>
                                 <div class="text-center">
                                     <p style="color: #e9415a; font-size: 15px;">进击的Coder</p>
                                     <span>微信公众号 </span>
@@ -58,7 +59,7 @@
                             <div class="p-sm" style="overflow: hidden; padding-bottom: 15px;">
                                 <p class="text-center">想结交更多的朋友吗?来进击的Coder瞧瞧吧</p>
                                 <p class="text-center">结交朋友、分享福利、灌水吐槽, 我们在这等你</p>
-                                <div class="text-center"><img class="code-img" src="/static/images/index4.jpg"/></div>
+                                <div class="text-center"><img class="code-img" src="{% static 'images/index4.jpg' %}"/></div>
                                 <div class="text-center">
                                     <p style="color: #e9415a; font-size: 15px;">进击的Coder</p>
                                     <span>QQ群号 </span>
@@ -71,7 +72,7 @@
                             <div class="p-sm" style="overflow: hidden; padding-bottom: 15px;">
                                 <p class="text-center">进击的Coder灌水太多? 想找纯粹的技术领地?</p>
                                 <p class="text-center">专注技术交流, 一同成长进步</p>
-                                <div class="text-center"><img class="code-img" src="/static/images/index5.jpg"/></div>
+                                <div class="text-center"><img class="code-img" src="{% static 'images/index5.jpg' %}"/></div>
                                 <div class="text-center">
                                     <p style="color: #18A57D; font-size: 15px;">激进的Coder</p>
                                     <p>
