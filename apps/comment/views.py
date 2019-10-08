@@ -32,7 +32,6 @@ def confirm(new_content, comment_post_ID, auser):
 def AddcommentView(request):
     if request.is_ajax():
         data = request.POST
-        pprint(data)
         # 评论内容哦你
         new_content = data.get('w')
         # 评论对象，指的是页面留言、文章、等

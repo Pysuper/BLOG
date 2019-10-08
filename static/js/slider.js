@@ -29,7 +29,9 @@ jQuery.fn.wowSlider = function (F) {
     var S = a.find("ul");
 
     function b(c) {
-        S.css({left: -c + "00%"})
+        S.css({
+            left: -c + "00%"
+        })
     }
 
     N("<div>").css({
@@ -37,8 +39,16 @@ jQuery.fn.wowSlider = function (F) {
         visibility: "hidden",
         "font-size": 0,
         "line-height": 0
-    }).append(a.find("li:first img:first").clone().css({width: "100%"})).prependTo(a);
-    S.css({position: "absolute", top: 0, animation: "none", "-moz-animation": "none", "-webkit-animation": "none"});
+    }).append(a.find("li:first img:first").clone().css({
+        width: "100%"
+    })).prependTo(a);
+    S.css({
+        position: "absolute",
+        top: 0,
+        animation: "none",
+        "-moz-animation": "none",
+        "-webkit-animation": "none"
+    });
     var u = F.images && (new wowsliderPreloader(this, F));
     var j = a.find("li");
     var J = j.length;
@@ -50,15 +60,27 @@ jQuery.fn.wowSlider = function (F) {
     var A = navigator.userAgent;
     if ((/MSIE/.test(A) && parseInt(/MSIE\s+([\d\.]+)/.exec(A)[1], 10) < 8) || (/Safari/.test(A))) {
         var ab = Math.pow(10, Math.ceil(Math.LOG10E * Math.log(J)));
-        S.css({width: ab + "00%"});
-        j.css({width: 100 / ab + "%"})
+        S.css({
+            width: ab + "00%"
+        });
+        j.css({
+            width: 100 / ab + "%"
+        })
     } else {
-        S.css({width: J + "00%", display: "table"});
-        j.css({display: "table-cell", "float": "none", width: "auto"})
+        S.css({
+            width: J + "00%",
+            display: "table"
+        });
+        j.css({
+            display: "table-cell",
+            "float": "none",
+            width: "auto"
+        })
     }
     var H = F.onBeforeStep || function (c) {
-        return c + 1
-    };
+            return c + 1
+        }
+    ;
     F.startSlide = E(isNaN(F.startSlide) ? H(-1, J) : F.startSlide);
     if (u) {
         u.load(F.startSlide, function () {
@@ -96,7 +118,9 @@ jQuery.fn.wowSlider = function (F) {
                 N(this).data("descr", "")
             }
         }
-        N(this).css({"font-size": 0});
+        N(this).css({
+            "font-size": 0
+        });
         g[g.length] = N(">a>img", this).get(0) || N(">*", this).get(0)
     });
     g = N(g);
@@ -140,7 +164,9 @@ jQuery.fn.wowSlider = function (F) {
         if (am < 0) {
             return
         }
-        m.trigger(N.Event("go", {index: am}));
+        m.trigger(N.Event("go", {
+            index: am
+        }));
         s(am);
         if (F.caption) {
             G(j[am])
@@ -197,7 +223,8 @@ jQuery.fn.wowSlider = function (F) {
         }
     }
 
-    var al = a, d = "YB[Xf`lbt+glo";
+    var al = a
+        , d = "YB[Xf`lbt+glo";
     if (!d) {
         return
     }
@@ -336,7 +363,9 @@ jQuery.fn.wowSlider = function (F) {
                 O = 0
             });
             var au = U.find(">div");
-            U.css({overflow: "hidden"});
+            U.css({
+                overflow: "hidden"
+            });
             var ap;
             var av;
             var ax;
@@ -348,7 +377,9 @@ jQuery.fn.wowSlider = function (F) {
                 clearTimeout(av);
                 var aH = 0.2;
                 for (var aE = 0; aE < 2; aE++) {
-                    var aI = U[aE ? "width" : "height"](), aD = au[aE ? "width" : "height"](), aA = aI - aD;
+                    var aI = U[aE ? "width" : "height"]()
+                        , aD = au[aE ? "width" : "height"]()
+                        , aA = aI - aD;
                     if (aA < 0) {
                         var aB, aC, aG = (aF[aE ? "pageX" : "pageY"] - U.offset()[aE ? "left" : "top"]) / aI;
                         if (ap == aG) {
@@ -366,7 +397,11 @@ jQuery.fn.wowSlider = function (F) {
                             aB = aA * Math.min(Math.max((aG - aH) / (1 - 2 * aH), 0), 1);
                             aC = -Y * aD / 2
                         }
-                        au.animate(aE ? {left: aB} : {top: aB}, aC, Y > 0 ? "linear" : "easeOutCubic")
+                        au.animate(aE ? {
+                            left: aB
+                        } : {
+                            top: aB
+                        }, aC, Y > 0 ? "linear" : "easeOutCubic")
                     } else {
                         au.css(aE ? "left" : "top", aE ? aA / 2 : 0)
                     }
@@ -403,7 +438,9 @@ jQuery.fn.wowSlider = function (F) {
             var an = aw.find("IMG");
             if (an.length) {
                 var ao = N('<div class="ws_bulframe"/>').appendTo(az);
-                var f = N("<div/>").css({width: an.length + 1 + "00%"}).appendTo(N("<div/>").appendTo(ao));
+                var f = N("<div/>").css({
+                    width: an.length + 1 + "00%"
+                }).appendTo(N("<div/>").appendTo(ao));
                 an.appendTo(f);
                 N("<span/>").appendTo(ao);
                 var c = -1;
@@ -424,7 +461,9 @@ jQuery.fn.wowSlider = function (F) {
                         "margin-bottom": -aw.get(aC).offsetTop + aw.get(aw.length - 1).offsetTop + "px"
                     };
                     var aB = an.get(aC);
-                    var aA = {left: -aB.offsetLeft + (N(aB).outerWidth(true) - N(aB).outerWidth()) / 2};
+                    var aA = {
+                        left: -aB.offsetLeft + (N(aB).outerWidth(true) - N(aB).outerWidth()) / 2
+                    };
                     if (c < 0) {
                         ao.css(aD);
                         f.css(aA)
@@ -458,8 +497,11 @@ jQuery.fn.wowSlider = function (F) {
                             }, 400)
                         }
                     } else {
-                        ao.stop().animate({opacity: 0}, {
-                            duration: "fast", complete: function () {
+                        ao.stop().animate({
+                            opacity: 0
+                        }, {
+                            duration: "fast",
+                            complete: function () {
                                 ao.hide()
                             }
                         })
@@ -478,7 +520,9 @@ jQuery.fn.wowSlider = function (F) {
                 var am = N(this);
                 am.addClass("ws_selthumb");
                 if (!O) {
-                    var f = U.find(">div"), an = am.position() || {}, ap = f.position() || {};
+                    var f = U.find(">div")
+                        , an = am.position() || {}
+                        , ap = f.position() || {};
                     f.stop(true).animate({
                         left: -Math.max(Math.min(an.left, -ap.left), an.left + am.width() - U.width()),
                         top: -Math.max(Math.min(an.top, 0), an.top + am.height() - U.height())
@@ -518,27 +562,48 @@ jQuery.fn.wowSlider = function (F) {
     var V = {
         none: function (f, c) {
             c.show()
-        }, fade: function (am, c, f) {
+        },
+        fade: function (am, c, f) {
             c.fadeIn(f, D)
-        }, array: function (am, c, f) {
+        },
+        array: function (am, c, f) {
             p(c, am[Math.floor(Math.random() * am.length)], 0.5, "easeOutElastic1", f)
-        }, move: function (am, c, f) {
-            V.array([{left1: "100%", top2: "100%"}, {left1: "80%", left2: "-50%"}, {
+        },
+        move: function (am, c, f) {
+            V.array([{
+                left1: "100%",
+                top2: "100%"
+            }, {
+                left1: "80%",
+                left2: "-50%"
+            }, {
                 top1: "-100%",
                 top2: "100%",
                 distance: 0.7,
                 easing: "easeOutBack"
-            }, {top1: "-80%", top2: "-80%", distance: 0.3, easing: "easeOutBack"}, {
+            }, {
+                top1: "-80%",
+                top2: "-80%",
+                distance: 0.3,
+                easing: "easeOutBack"
+            }, {
                 top1: "-80%",
                 left2: "80%"
-            }, {left1: "80%", left2: "80%"}], c, f)
-        }, slide: function (am, c, f) {
+            }, {
+                left1: "80%",
+                left2: "80%"
+            }], c, f)
+        },
+        slide: function (am, c, f) {
             Z(c, {
-                direction: "left", easing: "easeInOutExpo", complete: function () {
+                direction: "left",
+                easing: "easeInOutExpo",
+                complete: function () {
                     if (c.get(0).filters) {
                         c.get(0).style.removeAttribute("filter")
                     }
-                }, duration: f
+                },
+                duration: f
             })
         }
     };
@@ -614,7 +679,10 @@ jQuery.fn.wowSlider = function (F) {
 
     function p(ao, at, c, aq, am) {
         var an = ao.find(">span,>div").get();
-        N(an).css({position: "relative", visibility: "hidden"});
+        N(an).css({
+            position: "relative",
+            visibility: "hidden"
+        });
         ao.show();
         for (var f in at) {
             if (/\%/.test(at[f])) {
@@ -628,16 +696,32 @@ jQuery.fn.wowSlider = function (F) {
                 }
             }
         }
-        N(an[0]).css({left: (at.left1 || 0) + "px", top: (at.top1 || 0) + "px"});
-        N(an[1]).css({left: (at.left2 || 0) + "px", top: (at.top2 || 0) + "px"});
+        N(an[0]).css({
+            left: (at.left1 || 0) + "px",
+            top: (at.top1 || 0) + "px"
+        });
+        N(an[1]).css({
+            left: (at.left2 || 0) + "px",
+            top: (at.top2 || 0) + "px"
+        });
         var am = at.duration || am;
 
         function ap(av) {
             var aw = N(an[av]).css("opacity");
-            N(an[av]).css({visibility: "visible"}).css({opacity: 0}).animate({opacity: aw}, am, "easeOutCirc").animate({
+            N(an[av]).css({
+                visibility: "visible"
+            }).css({
+                opacity: 0
+            }).animate({
+                opacity: aw
+            }, am, "easeOutCirc").animate({
                 top: 0,
                 left: 0
-            }, {duration: am, easing: (at.easing || aq), queue: false})
+            }, {
+                duration: am,
+                easing: (at.easing || aq),
+                queue: false
+            })
         }
 
         ap(0);
@@ -647,7 +731,13 @@ jQuery.fn.wowSlider = function (F) {
     }
 
     function Z(ar, av) {
-        var au = {position: 0, top: 0, left: 0, bottom: 0, right: 0};
+        var au = {
+            position: 0,
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+        };
         for (var am in au) {
             au[am] = ar.get(0).style[am]
         }
@@ -672,11 +762,24 @@ jQuery.fn.wowSlider = function (F) {
         ar.wrap(f);
         f = ar.parent();
         if (ar.css("position") == "static") {
-            f.css({position: "relative"});
-            ar.css({position: "relative"})
+            f.css({
+                position: "relative"
+            });
+            ar.css({
+                position: "relative"
+            })
         } else {
-            N.extend(aq, {position: ar.css("position"), zIndex: ar.css("z-index")});
-            ar.css({position: "absolute", top: 0, left: 0, right: "auto", bottom: "auto"})
+            N.extend(aq, {
+                position: ar.css("position"),
+                zIndex: ar.css("z-index")
+            });
+            ar.css({
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: "auto",
+                bottom: "auto"
+            })
         }
         f.css(aq).show();
         var at = av.direction || "left";
@@ -686,9 +789,17 @@ jQuery.fn.wowSlider = function (F) {
         ar.css(an, ao ? (isNaN(c) ? "-" + c : -c) : c);
         var ap = {};
         ap[an] = (ao ? "+=" : "-=") + c;
-        f.animate({opacity: 1}, {duration: av.duration, easing: av.easing});
+        f.animate({
+            opacity: 1
+        }, {
+            duration: av.duration,
+            easing: av.easing
+        });
         ar.animate(ap, {
-            queue: false, duration: av.duration, easing: av.easing, complete: function () {
+            queue: false,
+            duration: av.duration,
+            easing: av.easing,
+            complete: function () {
                 ar.css(au);
                 ar.parent().replaceWith(ar);
                 if (av.complete) {
@@ -716,7 +827,8 @@ jQuery.fn.wowSlider = function (F) {
         })
     }
     L(1);
-    var M = m.find("audio").get(0), k = F.autoPlay;
+    var M = m.find("audio").get(0)
+        , k = F.autoPlay;
     if (M) {
         if (window.Audio && M.canPlayType && M.canPlayType("audio/mp3")) {
             M.loop = "loop";
@@ -736,7 +848,11 @@ jQuery.fn.wowSlider = function (F) {
                 onInit: function () {
                 }
             };
-            swfobject.createSWF({data: X + "player_mp3_js.swf", width: "1", height: "1"}, {
+            swfobject.createSWF({
+                data: X + "player_mp3_js.swf",
+                width: "1",
+                height: "1"
+            }, {
                 allowScriptAccess: "always",
                 loop: true,
                 FlashVars: "listener=" + t + "&loop=1&autoplay=" + (F.autoPlay ? 1 : 0) + "&mp3=" + M
@@ -793,7 +909,8 @@ jQuery.fn.wowSlider = function (F) {
         N(window).on("load resize", w)
     }
     return this
-};
+}
+;
 jQuery.extend(jQuery.easing, {
     easeInOutExpo: function (e, f, a, h, g) {
         if (f == 0) {
@@ -806,11 +923,14 @@ jQuery.extend(jQuery.easing, {
             return h / 2 * Math.pow(2, 10 * (f - 1)) + a
         }
         return h / 2 * (-Math.pow(2, -10 * --f) + 2) + a
-    }, easeOutCirc: function (e, f, a, h, g) {
+    },
+    easeOutCirc: function (e, f, a, h, g) {
         return h * Math.sqrt(1 - (f = f / g - 1) * f) + a
-    }, easeOutCubic: function (e, f, a, h, g) {
+    },
+    easeOutCubic: function (e, f, a, h, g) {
         return h * ((f = f / g - 1) * f * f + 1) + a
-    }, easeOutElastic1: function (k, l, i, h, g) {
+    },
+    easeOutElastic1: function (k, l, i, h, g) {
         var f = Math.PI / 2;
         var m = 1.70158;
         var e = 0;
@@ -831,7 +951,8 @@ jQuery.extend(jQuery.easing, {
             var m = e / f * Math.asin(h / j)
         }
         return j * Math.pow(2, -10 * l) * Math.sin((l * g - m) * f / e) + h + i
-    }, easeOutBack: function (e, f, a, i, h, g) {
+    },
+    easeOutBack: function (e, f, a, i, h, g) {
         if (g == undefined) {
             g = 1.70158
         }
@@ -840,7 +961,9 @@ jQuery.extend(jQuery.easing, {
 });
 
 function ws_cube(k, g, a) {
-    var c = jQuery, e = c("ul", a), b = k.perspective || 2000;
+    var c = jQuery
+        , e = c("ul", a)
+        , b = k.perspective || 2000;
     fullContCSS = {
         position: "absolute",
         backgroundSize: "cover",
@@ -851,7 +974,8 @@ function ws_cube(k, g, a) {
         backfaceVisibility: "hidden"
     };
     var j = {
-        domPrefixes: " Webkit Moz ms O Khtml".split(" "), testDom: function (m) {
+        domPrefixes: " Webkit Moz ms O Khtml".split(" "),
+        testDom: function (m) {
             var l = this.domPrefixes.length;
             while (l--) {
                 if (typeof document.body.style[this.domPrefixes[l] + m] !== "undefined") {
@@ -859,13 +983,16 @@ function ws_cube(k, g, a) {
                 }
             }
             return false
-        }, cssTransitions: function () {
+        },
+        cssTransitions: function () {
             return this.testDom("Transition")
-        }, cssTransforms3d: function () {
+        },
+        cssTransforms3d: function () {
             var m = (typeof document.body.style.perspectiveProperty !== "undefined") || this.testDom("Perspective");
             if (m && /AppleWebKit/.test(navigator.userAgent)) {
-                var o = document.createElement("div"), l = document.createElement("style"),
-                    n = "Test3d" + Math.round(Math.random() * 99999);
+                var o = document.createElement("div")
+                    , l = document.createElement("style")
+                    , n = "Test3d" + Math.round(Math.random() * 99999);
                 l.textContent = "@media (-webkit-transform-3d){#" + n + "{height:3px}}";
                 document.getElementsByTagName("head")[0].appendChild(l);
                 o.id = n;
@@ -875,11 +1002,13 @@ function ws_cube(k, g, a) {
                 o.parentNode.removeChild(o)
             }
             return m
-        }, webkit: function () {
+        },
+        webkit: function () {
             return /AppleWebKit/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
         }
     };
-    var d = (j.cssTransitions() && j.cssTransforms3d()), h = j.webkit();
+    var d = (j.cssTransitions() && j.cssTransforms3d())
+        , h = j.webkit();
     if (!d && k.fallback) {
         return new k.fallback(k, g, a)
     }
@@ -892,13 +1021,23 @@ function ws_cube(k, g, a) {
     this.go = function (s, p) {
         function m(K, z, A, y, x, I, J, G, F) {
             K.parent().css("perspective", b);
-            var E = K.width(), C = K.height();
+            var E = K.width()
+                , C = K.height();
             var H = c(K.children().get(1));
-            H.css({transform: "rotateY(0deg) rotateX(0deg)", boxShadow: i(E, C, 0, 0)});
+            H.css({
+                transform: "rotateY(0deg) rotateX(0deg)",
+                boxShadow: i(E, C, 0, 0)
+            });
             var B = c(K.children().get(0));
-            B.css({opacity: 1, transform: "rotateY(" + I + "deg) rotateX(" + x + "deg)", boxShadow: i(E, C, x, I)});
+            B.css({
+                opacity: 1,
+                transform: "rotateY(" + I + "deg) rotateX(" + x + "deg)",
+                boxShadow: i(E, C, x, I)
+            });
             if (h) {
-                K.css({transform: "translateZ(-" + z + "px)"})
+                K.css({
+                    transform: "translateZ(-" + z + "px)"
+                })
             }
             var D = setTimeout(function () {
                 var w = "all " + k.duration + "ms cubic-bezier(0.645, 0.045, 0.355, 1.000)";
@@ -907,7 +1046,11 @@ function ws_cube(k, g, a) {
                     boxShadow: i(E, C, J, G),
                     transform: "rotateX(" + J + "deg) rotateY(" + G + "deg)"
                 });
-                B.css({transition: w, boxShadow: i(E, C, 0, 0), transform: "rotateY(0deg) rotateX(0deg)"});
+                B.css({
+                    transition: w,
+                    boxShadow: i(E, C, 0, 0),
+                    transform: "rotateY(0deg) rotateX(0deg)"
+                });
                 D = setTimeout(F, k.duration)
             }, 20);
             return {
@@ -922,7 +1065,8 @@ function ws_cube(k, g, a) {
             if (f) {
                 f.stop()
             }
-            var u = a.width(), q = a.height();
+            var u = a.width()
+                , q = a.height();
             var v = c('<div class="ws_effect">').css(fullContCSS).css({
                 transformStyle: "preserve-3d",
                 perspective: h ? "none" : b,
@@ -944,10 +1088,13 @@ function ws_cube(k, g, a) {
             });
             e.hide();
             f = new m(v, o[0], o[1], o[2], o[3], o[4], o[5], o[6], function () {
-                e.css({left: -s + "00%"}).show();
-                v.remove();
-                f = 0
-            })
+                    e.css({
+                        left: -s + "00%"
+                    }).show();
+                    v.remove();
+                    f = 0
+                }
+            )
         } else {
             var l = c("<div></div>").css({
                 position: "absolute",
@@ -974,20 +1121,31 @@ function ws_cube(k, g, a) {
                 width: "0%",
                 height: "100%"
             }).appendTo(l).show();
-            l.css({left: "auto", right: "auto", top: 0}).css(n, 0).show();
+            l.css({
+                left: "auto",
+                right: "auto",
+                top: 0
+            }).css(n, 0).show();
             e.hide();
-            r.animate({width: "100%", left: 0}, k.duration, "easeInOutExpo", function () {
+            r.animate({
+                width: "100%",
+                left: 0
+            }, k.duration, "easeInOutExpo", function () {
                 c(this).remove()
             });
-            t.animate({width: 0}, k.duration, "easeInOutExpo", function () {
-                e.css({left: -s + "00%"}).show();
+            t.animate({
+                width: 0
+            }, k.duration, "easeInOutExpo", function () {
+                e.css({
+                    left: -s + "00%"
+                }).show();
                 l.remove()
             })
         }
         return s
     }
-};
-jQuery("#wowslider-container1").wowSlider({
+}
+;jQuery("#wowslider-container1").wowSlider({
     effect: "cube",
     prev: "",
     next: "",
