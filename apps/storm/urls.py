@@ -12,13 +12,13 @@ urlpatterns = [
     url(r'^category/project/$', ProjectView, name='project'),   # 项目合作
     url(r'^category/question/$', QuestionView, name='question'),    # 提问交流
     # 分类页面
-    url(r'^category/(?P<bigslug>.*?)/(?P<slug>.*?)', IndexView.as_view(template_name='content.html'), name='category'),
+    url(r'^category/(?P<bigslug>.*)/(?P<slug>.*)', IndexView.as_view(template_name='content.html'), name='category'),
     # 归档页面
     url(r'^date/(?P<year>\d+)/(?P<month>\d+)/$', IndexView.as_view(template_name='archive.html'), name='date'),
     # 标签页面
-    url(r'^tag/(?P<tag>.*?)/$', IndexView.as_view(template_name='content.html'), name='tag'),
+    url(r'^tag/(?P<tag>.*)/$', IndexView.as_view(template_name='content.html'), name='tag'),
     # 文章详情页面
-    url(r'^article/(?P<slug>.*?)/$', DetailView.as_view(), name='article'),
+    url(r'^article/(?P<slug>.*)/$', DetailView.as_view(), name='article'),
     # 全文搜索
     url(r'^search/$', MySearchView.as_view(), name='search'),
     # 喜欢
