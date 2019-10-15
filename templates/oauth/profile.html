@@ -9,7 +9,7 @@
 
 <!--主要内容块-->
 {% block main %}
-<main style="background-image: url('../../static/images/index4.jpg')">
+<main style="background-image: url({% static 'images/index4.jpg' %})">
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3 px-xl-5">
@@ -22,7 +22,7 @@
                             <li class="list-group-item text-center border-0" id="profile-avatar">
                                 {% get_user_data request.session.uid as user %}
                                 {% if user %}
-                                <img class="avatar" src="/media/{{ user.avatar }}" alt="{{user.username}}">
+                                <img class="avatar" src="http://pyh05v5q8.bkt.clouddn.com/media/{{ user.avatar }}" alt="{{user.username}}">
                             </li>
                             <li class="list-group-item ml-5 border-0">
                                 <span class="font-weight-bold">用户名：</span>
