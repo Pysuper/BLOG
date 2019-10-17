@@ -41,7 +41,7 @@ def register_view(request):
 
             user_length = len(username)
 
-            if user_length < 5 or user_length > 20:
+            if user_length < 3 or user_length > 10:
                 context['user_error'] = 'length'
                 return render(request, 'account/signup.html', context)
             if user:
