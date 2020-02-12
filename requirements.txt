@@ -5,7 +5,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 defusedxml==0.6.0
 diff-match-patch==20181111
-Django==1.11
+Django==1.11.28
 django-appconf==1.0.3
 django-ckeditor==5.7.1
 django-crispy-forms==1.7.2
