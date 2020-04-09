@@ -124,6 +124,7 @@
     {% block login_css %}
     {% endblock login_css %}
     <link rel="stylesheet" href="{% static 'highlights/monokai.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search-form.css' %}">
     <script type='text/javascript' src='{% static 'js/jquery.min.js' %}'></script>
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -135,7 +136,56 @@
             "setting": "crayon-setting",
             "selected": "crayon-setting-selected",
             "changed": "crayon-setting-changed",
-            "special": "crayon-setting-special",
+            "special": "crayon-setting-special",	<section class="container">
+			                    <li id="menu-item-851">
+						                            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform"action="/search/">
+										                                <div class="input-group">
+															                                <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索从这里开始......" required="True"
+																			                                       style="margin-top: 4px;width: 200px;border-radius: 5px;height: 35px;">
+																			                                <button class="btn btn-info rounded-0" type="submit"
+																								                                        style="height: 45px;width: 52px;border-radius: 5px;margin-top: -6px;margin-left: -5px;">
+																								                                    <i class="fa fa-search"></i>
+																												                                    </button>
+																																                                </div>
+																																				                        </form>
+																																							                        <script src="http://qny.zhengxingtao.com/static/js/jquery.min.js"></script>
+																																										                        <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+																																													                        <script type="text/javascript">
+                            function searchToggle(obj, evt) {
+				                                    var container = $(obj).closest('.search-wrapper');
+								                                    if (!container.hasClass('active')) {
+													                                        container.addClass('active');
+																		                                    evt.preventDefault();
+																						                                    } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+																											                                        container.removeClass('active');
+																																                                    // clear input
+																																                                    container.find('.search-input').val('');
+																																				                                        // clear and hide result container when we press close
+																																				                                        container.find('.result-container').fadeOut(100, function () {
+																																										                                        $(this).empty();
+																																															                                    });
+																																									                                }
+												                                }
+
+                            function submitFn(obj, evt) {
+				                                    value = $(obj).find('.search-input').val().trim();
+								                                    _html = "Yup yup! Your search text sounds like this: ";
+												                                    if (!value.length) {
+																	                                        _html = "Yup yup! Add some text friend :D";
+																						                                } else {
+																											                                    _html += "<b>" + value + "</b>";
+																															                                    }
+																                                    $(obj).find('.result-container').html('<span>' + _html + '</span>');
+																				                                    $(obj).find('.result-container').fadeIn(100);
+																								                                    evt.preventDefault();
+																												                                }
+                        </script>
+			                    </li>
+					                    </section>
+
+							                    <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+									                    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+											                    <script type="text/javascript">
             "orig_value": "data-orig-value",
             "debug": ""
         };
@@ -190,9 +240,18 @@
     <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405" src="{% static 'js/lightapp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript"></script>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+	  var hm = document.createElement("script");
+	    hm.src = "https://hm.baidu.com/hm.js?190e8439058038a420d48ae08cf1504d";
+	      var s = document.getElementsByTagName("script")[0]; 
+	        s.parentNode.insertBefore(hm, s);
+})();
+    </script>
 </head>
 
-<body class="home blog">
+<body class="home blog" style="background-color: #D6D5B7">
 
 <header id="header" class="header">
     <div class="container-inner">
@@ -247,75 +306,159 @@
                 <!--导航条结束-->
 
                 <!--搜索框-->
-                <li style="float:right;">
-                <li id="menu-item-851">
-                    <div class="toggle-search"><i class="fa fa-search"></i></div>
-                    <div class="search-expand" style="display: none;">
-                        <div class="search-expand-inner">
-                            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
-                                <div class="input-group">
-                                    <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索" required=True>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-info rounded-0" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!--<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>-->
-                    <script src="{% static 'js/jquery.min.js' %}"></script>
-                    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
-                    <script type="text/javascript">
-                        function searchToggle(obj, evt) {
-                            var container = $(obj).closest('.search-wrapper');
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		                <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+				                <script type="text/javascript">
+                    function searchToggle(obj, evt) {
+			                            var container = $(obj).closest('.search-wrapper');
+						                            if (!container.hasClass('active')) {
+										                                container.addClass('active');
+														                            evt.preventDefault();
+																	                            } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+																					                                container.removeClass('active');
+																									                            // clear input
+																									                            container.find('.search-input').val('');
+																												                                // clear and hide result container when we press close
+																												                                container.find('.result-container').fadeOut(100, function () {
+																																	                                $(this).empty();
+																																					                            });
+																																                        }
+									                        }
 
-                            if (!container.hasClass('active')) {
-                                container.addClass('active');
-                                evt.preventDefault();
-                            } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
-                                container.removeClass('active');
-                                // clear input
-                                container.find('.search-input').val('');
-                                // clear and hide result container when we press close
-                                container.find('.result-container').fadeOut(100, function () {
-                                    $(this).empty();
-                                });
-                            }
-                        }
+                    function submitFn(obj, evt) {
+			                            value = $(obj).find('.search-input').val().trim();
+						                            _html = "Yup yup! Your search text sounds like this: ";
+									                            if (!value.length) {
+													                                _html = "Yup yup! Add some text friend :D";
+																	                        } else {
+																					                            _html += "<b>" + value + "</b>";
+																								                            }
+												                            $(obj).find('.result-container').html('<span>' + _html + '</span>');
+															                            $(obj).find('.result-container').fadeIn(100);
+																		                            evt.preventDefault();
+																					                        }
+                </script>
 
-                        function submitFn(obj, evt) {
-                            value = $(obj).find('.search-input').val().trim();
-
-                            _html = "Yup yup! Your search text sounds like this: ";
-                            if (!value.length) {
-                                _html = "Yup yup! Add some text friend :D";
-                            } else {
-                                _html += "<b>" + value + "</b>";
-                            }
-
-                            $(obj).find('.result-container').html('<span>' + _html + '</span>');
-                            $(obj).find('.result-container').fadeIn(100);
-
-                            evt.preventDefault();
-                        }
-                    </script>
-                </li>
-                <!--搜索框结束-->
-
-            </ul>
-        </div>
-        <!--导航条结束-->
+		                <li id="menu-item-851" style="margin-top: -7px;">
+					                    <section class="container" style="margin-bottom: 0px;">
+								                            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform"
+												                                  action="/search/">
+												                                <div class="input-group">
+																	                                <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索"
+														                                          required="True"
+							                                       style="margin: 11px -45px 0 20px; width: 183px; border-radius: 5px; height: 35px; padding-right: 45px;">
+																					                                <button class="btn btn-info rounded-0" type="submit"
+											                                            style="height: 45px; width: 52px; border-radius: 0 5px 5px 0; margin: 11px 0 0 0;">
+																										                                    <i class="fa fa-search"></i>
+																														                                    </button>
+																																		                                </div>
+																																						                        </form>
+																																									                    </section>
+																																											                    </li>
+																																													                </ul>
+																																															        </div>
+		<!--导航条结束-->
     </div>
 </header>
+
+<!--动态背景开始-->
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+<script>
+    !
+            function () {
+		                function n(n, e, t) {
+					                return n.getAttribute(e) || t
+								            }
+
+				            function e(n) {
+						                    return document.getElementsByTagName(n)
+									                }
+
+					                function t() {
+								                var t = e("script"),
+										                    o = t.length,
+												                        i = t[o - 1];
+1										                return {
+													                    l: o,
+															                        z: n(i, "zIndex", -1),
+																		                    o: n(i, "opacity", 1),
+																				                        c: n(i, "color", "0,0,0"),
+																							                    n: n(i, "count", 150)
+																										                    }
+												            }
+
+							            function o() {
+									                    a = m.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+											                        c = m.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+															            }
+
+								                function i() {
+											                r.clearRect(0, 0, a, c);
+													                var n, e, t, o, m, l;
+															                s.forEach(function (i, x) {
+																		                    for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 : 1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1, 1), e = x + 1; e < u.length; e++) n = u[e],
+			                           null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o, i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t / 2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y), r.lineTo(n.x, n.y), r.stroke()))
+							                   }),
+															                    x(i)
+																		                }
+
+										            var a, c, u, m = document.createElement("canvas"),
+										                d = t(),
+												                l = "c_n" + d.l,
+														                r = m.getContext("2d"),
+																                x = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+																			                    function (n) {
+																						                            window.setTimeout(n, 1e3 / 45)
+																										                        },
+																		                w = Math.random,
+																				                y = {
+																							                    x: null,
+																									                        y: null,
+																												                    max: 2e4
+																															                    };
+											                m.id = l,
+											                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z + ";opacity:" + d.o,
+													                    e("body")[0].appendChild(m),
+															                    o(),
+																	                    window.onresize = o,
+																			                    window.onmousemove = function (n) {
+																						                        n = n || window.event,
+																									                        y.x = n.clientX,
+																												                        y.y = n.clientY
+																																                },
+																					                    window.onmouseout = function () {
+																								                        y.x = null,
+																											                        y.y = null
+																															                };
+													            for (var s = [], f = 0; d.n > f; f++) {
+															                    var h = w() * a,
+																		                        g = w() * c,
+																					                    v = 2 * w() - 1,
+																							                        p = 2 * w() - 1;
+																	                    s.push({
+																				                        x: h,
+																							                    y: g,
+																									                        xa: v,
+																												                    ya: p,
+																														                        max: 6e3
+																																		                })
+																			                }
+														                u = s.concat([y]),
+														                    setTimeout(function () {
+																	                            i()
+																					                        },
+																								                    100)
+																	            }();
+</script>
+<!--动态背景结束-->
 
 <section class="container">
     <div class="speedbar">
         <!--登录-->
         <!--目前登录功能只有注册登录其它没必要没做-->
         <div class="pull-right">
-            {% if request.session.username|default:'' == '' %}
+	    <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1278730175'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1278730175%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+	    {% if request.session.username|default:'' == '' %}
                 <i class="fa fa-power-off"></i>
                 <a href="{% url 'accounts:login' %}?next={{ request.path }}">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-user-plus"></i>
@@ -330,11 +473,10 @@
             {% endif %}
         </div>
         <!--登录注册结束-->
-
         <!--公告-->
         <div class="toptip">
             <!--<strong class="text-success"><i class="fa fa-volume-up"></i></strong>{% get_active %}-->
-            <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎欢迎~~~
+	    <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎访问~~
         </div>
         <!--公告结束-->
 
@@ -355,11 +497,12 @@
             <a href="/" title="TAO">SmallSpider</a>
             {#            <a href="/" title="静觅">SmallSpider</a> 版权所有丨采用#}
             {#            <a href="http://yusi123.com/"> 欲思 </a>主题丨#}
-            {#            <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于#}
-            {#            <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">腾讯云主机</a> &#}
-            {#            <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 </a>丨#}
-            <a href="/sitemap.xml" title="Sitemap" target="_blank">网站地图</a>
-        </div>
+            <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于
+            <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">阿里云主机</a>
+            <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 |</a>
+	    <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">皖ICP备19021024号</a>
+            <a href="/sitemap.xml" title="Sitemap" target="_blank">| 网站地图 </a>
+	</div>
     </div>
 </footer>
 <!--网站底部结束-->
