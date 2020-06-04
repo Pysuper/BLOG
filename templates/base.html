@@ -59,14 +59,9 @@
                 var b;
                 if (!l || !l.fillText) return !1;
                 switch (l.textBaseline = "top", l.font = "600 32px Arial", a) {
-                    case "flag":
-                        return !(b = d([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819])) && (b = d([
-                            55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128,
-                            56423, 56128, 56447
-                        ], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203,
-                            56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447
-                        ]), !b);
-                    case "emoji":
+                    case"flag":
+                        return !(b = d([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819])) && (b = d([55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447]), !b);
+                    case"emoji":
                         return b = d([55357, 56692, 8205, 9792, 65039], [55357, 56692, 8203, 9792, 65039]), !b
                 }
                 return !1
@@ -77,24 +72,18 @@
                 c.src = a, c.defer = c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c)
             }
 
-            var g, h, i, j, k = b.createElement("canvas"),
-                l = k.getContext && k.getContext("2d");
+            var g, h, i, j, k = b.createElement("canvas"), l = k.getContext && k.getContext("2d");
             for (j = Array("flag", "emoji"), c.supports = {
                 everything: !0,
                 everythingExceptFlag: !0
-            }, i = 0; i < j.length; i++) c.supports[j[i]] = e(j[i]), c.supports.everything = c.supports
-                .everything && c.supports[j[i]], "flag" !== j[i] && (c.supports.everythingExceptFlag = c.supports
-                .everythingExceptFlag && c.supports[j[i]]);
-            c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c
-                .readyCallback = function () {
+            }, i = 0; i < j.length; i++) c.supports[j[i]] = e(j[i]), c.supports.everything = c.supports.everything && c.supports[j[i]], "flag" !== j[i] && (c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && c.supports[j[i]]);
+            c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c.readyCallback = function () {
                 c.DOMReady = !0
             }, c.supports.everything || (h = function () {
                 c.readyCallback()
-            }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", h, !1), a.addEventListener("load",
-                h, !1)) : (a.attachEvent("onload", h), b.attachEvent("onreadystatechange", function () {
+            }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", h, !1), a.addEventListener("load", h, !1)) : (a.attachEvent("onload", h), b.attachEvent("onreadystatechange", function () {
                 "complete" === b.readyState && c.readyCallback()
-            })), g = c.source || {}, g.concatemoji ? f(g.concatemoji) : g.wpemoji && g.twemoji && (f(g.twemoji),
-                f(g.wpemoji)))
+            })), g = c.source || {}, g.concatemoji ? f(g.concatemoji) : g.wpemoji && g.twemoji && (f(g.twemoji), f(g.wpemoji)))
         }(window, document, window._wpemojiSettings);
     </script>
     <style type="text/css">
@@ -114,18 +103,42 @@
     {% block head %}
     {% endblock head %}
     <link rel='stylesheet' id='crayon-css' href='{% static 'css/crayon.min.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css' media='screen, print'/>
-    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css' media='print'/>
+    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css'
+          media='all'/>
+    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css'
+          media='screen, print'/>
+    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css'
+          media='print'/>
     <link rel='stylesheet' id='style-css' href='{% static 'css/style.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}' type='text/css' media='all'/>
-    {% block login_css %}
-    {% endblock login_css %}
+    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}'
+          type='text/css' media='all'/>
     <link rel="stylesheet" href="{% static 'highlights/monokai.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/search-form.css' %}">
     <script type='text/javascript' src='{% static 'js/jquery.min.js' %}'></script>
+
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var CrayonSyntaxSettings = {
+            "version": "_2.7.2_beta",
+            "is_admin": "0",
+            "ajaxurl": "https:\/\/cuiqingcai.com\/wp-admin\/admin-ajax.php",
+            "prefix": "crayon-",
+            "setting": "crayon-setting",
+            "selected": "crayon-setting-selected",
+            "changed": "crayon-setting-changed",
+            "special": "crayon-setting-special",
+            "orig_value": "data-orig-value",
+            "debug": ""
+        };
+        var CrayonSyntaxStrings = {
+            "copy": "\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u7528 %s \u7c98\u8d34\u3002",
+            "minimize": "\u70b9\u51fb\u5c55\u5f00\u4ee3\u7801"
+        };
+        /* ]]> */
+    </script>
     <script type='text/javascript' src='{% static 'js/crayon.min.js' %}'></script>
     <script type='text/javascript' src='{% static 'js/jquery.fitvids.js' %}'></script>
     <style>
@@ -168,18 +181,10 @@
 
     <!--百度统计-->
     <meta name="360-site-verification" content="bdc579accc68a98f1258ebcce2266afa"/>
-    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405" src="{% static 'js/lightapp.js' %}"></script>
+    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405"
+            src="{% static 'js/lightapp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript"></script>
-    <script>
-var _hmt = _hmt || [];
-(function() {
-	  var hm = document.createElement("script");
-	    hm.src = "https://hm.baidu.com/hm.js?190e8439058038a420d48ae08cf1504d";
-	      var s = document.getElementsByTagName("script")[0];
-	        s.parentNode.insertBefore(hm, s);
-})();
-    </script>
 </head>
 
 <body class="home blog" style="background-color: #D6D5B7">
@@ -214,22 +219,25 @@ var _hmt = _hmt || [];
 
                     <!--如果一级分类下有二级分类则进行渲染-->
                     {% if cate %}
-                        <li id="menu-item-14" class="menu-item menu-item-type-taxonomy menu-item-object-category {% if category == big.slug %}current-menu-item {% endif %} menu-item-has-children menu-item-14">
+                        <li id="menu-item-14"
+                            class="menu-item menu-item-type-taxonomy menu-item-object-category {% if category == big.slug %}current-menu-item {% endif %} menu-item-has-children menu-item-14">
                             <a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a>
                             <ul class="sub-menu">
 
                                 <!--导航条二级分类渲染-->
                                 {% for c in cate %}
-                                    <li id="menu-item-19" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19">
+                                    <li id="menu-item-19"
+                                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19">
                                         <a href="{% url 'blog:category' big.slug c.slug %}">{{ c.name }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
                         </li>
 
-                    <!--无二级分类的一级分类渲染-->
+                        <!--无二级分类的一级分类渲染-->
                     {% else %}
-                        <li id="menu-item-851" class="menu-item menu-item-type-post_type menu-item-object-page {% if category == big.slug %}current-menu-item {% endif %} menu-item-851">
+                        <li id="menu-item-851"
+                            class="menu-item menu-item-type-post_type menu-item-object-page {% if category == big.slug %}current-menu-item {% endif %} menu-item-851">
                             <a href="{% url 'blog:category' big.slug '' %}">{{ big.name }}</a>
                         </li>
                     {% endif %}
@@ -239,19 +247,25 @@ var _hmt = _hmt || [];
                 <!--搜索框-->
                 <li id="menu-item-851" style="margin-top: -7px;">
                     <section class="container" style="margin-bottom: 0px;">
-                        <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform" action="/search/">
+                        <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform"
+                              action="/search/">
                             <div class="input-group">
-                                <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索" required="True" style="margin: 11px -45px 0 20px; width: 183px; border-radius: 5px; height: 35px; padding-right: 45px;">
-                                <button class="btn btn-info rounded-0" type="submit" style="height: 45px; width: 52px; border-radius: 0 5px 5px 0; margin: 11px 0 0 0;">
+                                <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索"
+                                       required="True"
+                                       style="margin: 11px -45px 0 20px; width: 183px; border-radius: 5px; height: 35px; padding-right: 45px;">
+                                <button class="btn btn-info rounded-0" type="submit"
+                                        style="height: 45px; width: 52px; border-radius: 0 5px 5px 0; margin: 11px 0 0 0;">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </form>
                     </section>
                 </li>
+                <!--搜索框结束-->
+
             </ul>
         </div>
-		<!--导航条结束-->
+        <!--导航条结束-->
     </div>
 </header>
 
@@ -264,8 +278,7 @@ var _hmt = _hmt || [];
         <!--登录-->
         <!--目前登录功能只有注册登录其它没必要没做-->
         <div class="pull-right">
-	    <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1278730175'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1278730175%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-	    {% if request.session.username|default:'' == '' %}
+            {% if request.session.username|default:'' == '' %}
                 <i class="fa fa-power-off"></i>
                 <a href="{% url 'accounts:login' %}?next={{ request.path }}">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-user-plus"></i>
@@ -283,7 +296,7 @@ var _hmt = _hmt || [];
         <!--公告-->
         <div class="toptip">
             <!--<strong class="text-success"><i class="fa fa-volume-up"></i></strong>{% get_active %}-->
-	    <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎访问~~
+            <strong class="text-success"><i class="fa fa-volume-up"></i></strong> &nbsp;&nbsp;欢迎访问~~
         </div>
         <!--公告结束-->
 
@@ -305,16 +318,19 @@ var _hmt = _hmt || [];
             <a href="https://www.djangoproject.com/" title="Django" target="_blank">基于Django构建</a>© 2019丨托管于
             <a rel="nofollow" target="_blank" href="https://www.aliyun.com/" title="阿里云主机" target="_blank">阿里云主机</a>
             <a rel="nofollow" target="_blank" href="https://www.qiniu.com/">七牛云存储 |</a>
-	        <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">皖ICP备19021024号</a>
+            <a rel="nofollow" target="_blank" href="http://www.beian.miit.gov.cn/">皖ICP备19021024号</a>
             <a href="/sitemap.xml" title="Sitemap" target="_blank">| 网站地图 </a>
-	    </div>
+        </div>
     </div>
 </footer>
 <!--网站底部结束-->
 
-<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css' media='all' property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all' property='stylesheet'/>
-<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-css' href='{% static 'css/nivo-slider.css' %}' type='text/css'
+      media='all' property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-public-css' href='{% static 'css/public.css' %}' type='text/css' media='all'
+      property='stylesheet'/>
+<link rel='stylesheet' id='metaslider-nivo-slider-bar-css' href='{% static 'css/bar.css' %}' type='text/css' media='all'
+      property='stylesheet'/>
 <script type='text/javascript' src='{% static 'js/jquery.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/wp-embed.min.js' %}'></script>
 <script type='text/javascript' src='{% static 'js/jquery.nivo.slider.pack.js' %}'></script>
@@ -350,33 +366,31 @@ var _hmt = _hmt || [];
 
 
 <!--搜索框-->
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
 <script type="text/javascript">
-            function searchToggle(obj, evt) {
-                var container = $(obj).closest('.search-wrapper');
-                if (!container.hasClass('active')) {
-                    container.addClass('active');
-                    evt.preventDefault();
-                } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
-                    container.removeClass('active');
-                    container.find('.search-input').val('');
-                }
-            }
+    function searchToggle(obj, evt) {
+        var container = $(obj).closest('.search-wrapper');
+        if (!container.hasClass('active')) {
+            container.addClass('active');
+            evt.preventDefault();
+        } else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+            container.removeClass('active');
+            container.find('.search-input').val('');
+        }
+    }
 
-            function submitFn(obj, evt) {
-                value = $(obj).find('.search-input').val().trim();
-                _html = "Yup yup! Your search text sounds like this: ";
-                if (!value.length) {
-                    _html = "Yup yup! Add some text friend :D";
-                } else {
-                    _html += "<b>" + value + "</b>";
-                }
-                $(obj).find('.result-container').html('<span>' + _html + '</span>');
-                $(obj).find('.result-container').fadeIn(100);
-                evt.preventDefault();
-            }
-        </script>
+    function submitFn(obj, evt) {
+        value = $(obj).find('.search-input').val().trim();
+        _html = "Yup yup! Your search text sounds like this: ";
+        if (!value.length) {
+            _html = "Yup yup! Add some text friend :D";
+        } else {
+            _html += "<b>" + value + "</b>";
+        }
+        $(obj).find('.result-container').html('<span>' + _html + '</span>');
+        $(obj).find('.result-container').fadeIn(100);
+        evt.preventDefault();
+    }
+</script>
 <!--搜索框结束-->
 
 </body>
