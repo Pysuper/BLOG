@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'storm',  # 博客应用
     'user',  # 自定义用户应用
     'comment',  # 评论
-    'xadmin',  # xadmin
     'crispy_forms',
     'ckeditor',  # 配置富文本编辑器
     'ckeditor_uploader',  # 配置上传图片
@@ -68,7 +67,7 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'NAME': 'blog',
+        'NAME': 'BLOG',
         # 避免映射数据库时出现警告
         # 'OPTIONS': {
         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -167,6 +166,7 @@ CKEDITOR_CONFIGS = {
         "width": 800,
         "tabSpaces": 4,
         "extraPlugins": "codesnippet",  # 配置代码插件
+        "config.tabSpaces":4,   # tab 使用的空格数量
     },
 }
 

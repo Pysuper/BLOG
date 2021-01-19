@@ -1,4 +1,3 @@
-import xadmin
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
@@ -25,7 +24,8 @@ sitemaps = {
 }
 
 urlpatterns = [
-                  url(r'^admin/', xadmin.site.urls, name="xadmin"),
+                  url(r'^baidu_verify_cB89BMWgbu\.html$', api_views.parse_seo),
+                  url(r'^admin/', admin.site.urls, name="admin"),
                   # 用户
                   url(r'^accounts/', include('user.urls', namespace='accounts')),
                   # storm

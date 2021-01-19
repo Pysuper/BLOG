@@ -6,6 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="360-site-verification" content="78261cad094060561b6c94aa57a6d696" />
     <meta name="baidu-tc-verification" content="0fb041a64ee71333c957d8c784961cc8"/>
     <meta property="qc:admins" content="145637425211673116375"/>
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
@@ -103,19 +104,13 @@
     {% block head %}
     {% endblock head %}
     <link rel='stylesheet' id='crayon-css' href='{% static 'css/crayon.min.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css'
-          media='all'/>
-    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css'
-          media='all'/>
-    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css'
-          media='all'/>
-    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css'
-          media='screen, print'/>
-    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css'
-          media='print'/>
+    <link rel='stylesheet' id='crayon-theme-github-css' href='{% static 'css/github.css' %}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='crayon-font-monaco-css' href='{% static 'css/monaco.css' %}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='page-list-style-css' href='{% static 'css/page-list.css' %}' type='text/css' media='all'/>
+    <link rel='stylesheet' id='l2h_style-css' href='{% static 'css/latex.min.css' %}' type='text/css' media='screen, print'/>
+    <link rel='stylesheet' id='l2h_print_style-css' href='{% static 'css/print.min.css' %}' type='text/css' media='print'/>
     <link rel='stylesheet' id='style-css' href='{% static 'css/style.css' %}' type='text/css' media='all'/>
-    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}'
-          type='text/css' media='all'/>
+    <link rel='stylesheet' id='style-css' href='{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}' type='text/css' media='all'/>
     <link rel="stylesheet" href="{% static 'highlights/monokai.css' %}">
     <script type='text/javascript' src='{% static 'js/jquery.min.js' %}'></script>
 
@@ -169,6 +164,10 @@
         a.bibtex_title {
             text-decoration: none;
         }
+    	
+	.toc ul li a {
+	    color: #0a2e38;
+	}
     </style>
     <meta name="keywords" content="记录个人成长">
     <meta name="description" content="个人主页">
@@ -181,8 +180,7 @@
 
     <!--百度统计-->
     <meta name="360-site-verification" content="bdc579accc68a98f1258ebcce2266afa"/>
-    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405"
-            src="{% static 'js/lightapp.js' %}"></script>
+    <script type="text/javascript" name="baidu-tc-cerfication" data-appid="5411405" src="{% static 'js/lightapp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript"></script>
 </head>
@@ -208,7 +206,7 @@
                 {% get_bigcategory_list as bigcategory %}
                 <li id="menu-item-44"
                     class="menu-item menu-item-type-custom menu-item-object-custom {% if not category %}current-menu-item current_page_item{% endif %} menu-item-home menu-item-44">
-                    <a href="/" style="width: 70px;">首页</a>
+                    <a href="/" style="width: 70px;">主页</a>
                 </li>
 
                 <!--导航条一级分类渲染-->
@@ -278,6 +276,7 @@
         <!--登录-->
         <!--目前登录功能只有注册登录其它没必要没做-->
         <div class="pull-right">
+		<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1278730175'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1278730175%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             {% if request.session.username|default:'' == '' %}
                 <i class="fa fa-power-off"></i>
                 <a href="{% url 'accounts:login' %}?next={{ request.path }}">登录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

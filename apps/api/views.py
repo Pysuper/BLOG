@@ -3,7 +3,7 @@ from storm.models import Article, Tag, Category
 from .serializers import (UserSerializer, ArticleSerializer, TagSerializer, CategorySerializer)
 from rest_framework import viewsets
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-
+from django.shortcuts import render
 
 # RESEful API VIEWS
 class UserListSet(viewsets.ModelViewSet):
@@ -31,3 +31,6 @@ class CategoryListSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
+
+def parse_seo(request):
+    return render(request, 'baidu_verify_cB89BMWgbu.html')

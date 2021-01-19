@@ -23,16 +23,17 @@
     <div class="content-wrap">
         <div class="content">
             <header class="archive-header">
-                <h1><i class="fa fa-folder-open"></i> &nbsp;分类：{{ query }}
-                    <a title="订阅福利专区" target="_blank" href="{% url 'blog:category' resources '' %}"><i
-                            class="rss fa fa-rss"></i></a>
+                <h1>
+                    <i class="fa fa-folder-open"></i> &nbsp;分类：{{ query }}
+                    <a title="订阅福利专区" target="_blank" href="{% url 'blog:category' resources '' %}">
+                        <i class="rss fa fa-rss"></i>
+                    </a>
                 </h1>
             </header>
             {% for article in search_list %}
                 <article class="excerpt">
                     <header>
-                        <a class="label label-important"
-                           href="{{ article.object.category.get_absolute_url }}">{{ article.object.category.name }}
+                        <a class="label label-important" href="{{ article.object.category.get_absolute_url }}">{{ article.object.category.name }}
                             <i class="label-arrow"></i>
                         </a>
 
@@ -44,7 +45,7 @@
                     </header>
                     <div class="focus">
                         <a target="_blank" href="{{ article.object.get_absolute_url }}">
-                        <img class="thumb" width="200" height="123" src="{{ article.object.img_link }}" alt="{{ article.object.title }}"/>
+                            <img class="thumb" width="200" height="123" src="{{ article.object.img_link }}" alt="{{ article.object.title }}"/>
                         </a>
                     </div>
                     <!--摘要处显示部分文章内容-->
@@ -84,7 +85,7 @@
                     {% else %}
                         <span class="text-secondary" title="当前页已经是首页">上一页</span>
                     {% endif %}
-                        <span class="mx-2">第&nbsp;{{ page_obj.number }}&nbsp;/&nbsp;{{ paginator.num_pages }}&nbsp;页</span>
+                    <span class="mx-2">第&nbsp;{{ page_obj.number }}&nbsp;/&nbsp;{{ paginator.num_pages }}&nbsp;页</span>
                     {% if page_obj.has_next %}
                         <a class="text-success" href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">下一页</a>
                     {% else %}

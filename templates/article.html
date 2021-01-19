@@ -29,7 +29,7 @@
                     <span class="muted"><i class="fa fa-user"></i><a href="/author/{{ object.author.name }}">{{ object.author }}</a></span>
                     <time class="muted"><i class="fa fa-clock-o"></i> {{ object.create_date|date:'y-m-d' }}</time>
                     <span class="muted"><i class="fa fa-eye"></i> {{ object.views }}浏览</span>
-                    <span class="muted"><i class="fa fa-eye"></i> {{ object.loves }}喜欢</span>
+                    <span class="muted" style="color: #f78585!important;"><i class="fa fa-heart-o"></i> {{ object.loves }}喜欢</span>
                     <span class="muted"><i class="fa fa-comments-o"></i><a href="/article/{{ object.slug }}#respond">0评论</a></span>
                 </div>
             </header>

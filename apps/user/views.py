@@ -155,8 +155,10 @@ def change_profile_view(request):
         form = ProfileForm(instance=request.user)
     return render(request, 'oauth/change_profile.html', context={'form': form})
 
+
 def page_not_found(request):
     return render(request, '404.html')
+
 
 def page_error(request):
     return render(request, '500.html')
